@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from datetime import datetime
 
 # Create your views here.
 def main(request):
@@ -7,7 +7,16 @@ def main(request):
 
 
 def surveyManager(request):
-    return render(request,"survey_manager_panel.html")
+    d=datetime.now()
+
+    L=[]
+    for i in range(0,10,2):
+
+        L.append((i,i+1,d,d.now))
+
+    L.append((10,11,None,None))
+
+    return render(request,"survey_manager_panel.html",{'dateTimes' : L })
 
 
 
