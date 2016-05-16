@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^registerView$', registerView, name='registerView'),
     url(r'^registerRequest$', registerRequest, name='registerRequest'),
     url(r'^surveyManager', surveyManager, name='surveyManager'),
+
+    url(r'^saveSurvey',main,name="saveSurvey")
 ]
