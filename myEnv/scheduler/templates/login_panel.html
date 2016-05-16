@@ -1,0 +1,21 @@
+<form action="{% url 'logIn' %}" method="post" class="form-signin">
+    {% csrf_token %}
+    <p>
+        <label>Email:</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+               autofocus>
+        <label>Hasło:</label>
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    </p>
+    <p>
+        {% if loginError %}
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{ loginError }}
+    </div>
+    </p>
+    {% endif %}
+    <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Zaloguj</button>
+</form>
+

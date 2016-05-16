@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if request.session.member_id %}
+<h1>Zarządzanie i tworzenie ankiety</h1>
+<p>
+    {% if surveyExist %}
+    Ankieta stworzona dnia
+    <span class="glyphicon glyphicon-time"></span>
+    {{ surveyCreationDate }}
+    {% else %}
+    Wypełnij poniższe pola aby stworzyć nową ankietę
+    {% endif %}
+
+</p>
+{% else %}
+<h1>Bład tworzenia ankiety </h1>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+{% if request.session.member_id %}
+
+{% else %}
+<p>
+    Aby móc tworzyć ankiety musisz się zalogowac lub utworzyć bezpłatne konto.
+</p>
+{% endif %}
+{% endblock %}
