@@ -1,8 +1,9 @@
 from django.db import models
 from datetime import datetime
 
-# Create your models here.
+from picklefield.fields import PickledObjectField
 
+# Create your models here.
 
 class SurveyUser(models.Model):
     name=models.CharField(max_length=50,blank=False)
@@ -18,8 +19,8 @@ class Survey(models.Model):
     title=models.CharField(max_length=300)
     description=models.TextField()
     user=models.ForeignKey(SurveyUser,on_delete=models.CASCADE)
-    fields=models.TextField()
-    creation_date=models.DateTimeField()
+    fields=PickledObjectField()
+    creation_date=models.DateTimeField(default=datetime.now,blank=True)
     userID=models.TextField()
     adminID=models.TextField()
 
@@ -28,6 +29,6 @@ class Answer(models.Model):
     name=models.CharField(max_length=50)
     surname=models.CharField(max_length=50)
     email=models.EmailField()
-    answer=models.TextField()
+    answer=PickledObjectField()
 
 

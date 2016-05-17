@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>Przykro nam ale wystąpił błąd</h1>
+{% endblock %}
+
+{% block content %}
+<p>
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{ errorDescription }}
+    </div>
+</p>
+{% endblock %}

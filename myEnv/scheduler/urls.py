@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^registerRequest$', registerRequest, name='registerRequest'),
     url(r'^surveyManager', surveyManager, name='surveyManager'),
 
-    url(r'^saveSurvey',main,name="saveSurvey")
+    url(r'^saveSurvey',saveSurvey,name="saveSurvey")
+
 ]
