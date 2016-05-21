@@ -20,8 +20,8 @@ pip install python-dateutil)
 - rejestracja - OK
 - tworzenie i edycja ankiet - OK ( po zaimplementowaniu dodawania odpowiedzi trzeba zadbać o spójność udzielonych odpowiedzi z dostępnymi polami ankiety )
 - generowanie raportów 
-- dodawanie i ewentualna modyfikacja odpowiedzi - WORKING
-- panel do zarządzania ankietami dla usera
+- dodawanie i ewentualna modyfikacja odpowiedzi - OK
+- panel do zarządzania ankietami dla usera - OK
 - tworzenie i wysyłanie raportów o odpowiedziach
 - statystyki 
 - ewentualna integracja ze stronami zewnętrznymi (googlecalendar ?)
