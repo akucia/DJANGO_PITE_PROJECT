@@ -4,6 +4,7 @@ from .views import *
 from .views_set.register_control import registerRequest,registerView
 from .views_set.survey_manager_control import saveSurvey, surveyManager
 from .views_set.survey_answer_control import saveAnswer, surveyAnswer
+from .views_set.account_manager import accountManager,removeElement
 
 urlpatterns = [
     url(r'^$', main, name='main_view'),
