@@ -22,16 +22,63 @@
 {% block content %}
 {% if request.session.member_id %}
 
-
-
 {% if adminID %}
 
 {% if lastOk == True %}
-        <div class="alert alert-success">
-            <strong>Success!</strong> Ostatnie zmiany zostały pomyślnie wprowadzone do bazy danych .
-        </div>
+<div class="alert alert-success">
+    <strong>Success!</strong> Ostatnie zmiany zostały pomyślnie wprowadzone do bazy danych .
+</div>
 {% endif %}
 
+{% if adminID and userID %}
+<h1> Dane dostępu do ankiety: </h1>
+<p>
+<ul>
+    <li>
+        Identywikator administratora: <strong>{{ adminID }}</strong>.
+    </li>
+    <li>
+        Link do zarządzania ankietą:
+        <input class="js-copytextarea" readonly="readonly" value="{{ adminURL }}">
+        <button class="js-textareacopybtn"><span class="glyphicon glyphicon-duplicate"></span></button>
+    </li>
+    <li>
+        Identyfikator dla odpowiadajcych: <strong>{{ userID }}</strong>
+    </li>
+    <li>
+        Link dla ankietowanych:
+        <input class="js-copytextarea2" readonly="readonly" value="{{ userURL }}">
+        <button class="js-textareacopybtn2"><span class="glyphicon glyphicon-duplicate"></span></button>
+    </li>
+</ul>
+</p>
+
+{% endif %}
+<h1>
+    Odpowiedzi:
+</h1>
+<p>
+<ul>
+    {% for fromDate,toDate,fitUsers in answerDates %}
+        <li>
+            <strong>
+                {{ fromDate }} - {{ toDate }}
+            </strong>
+            <ol>
+                {% for name,surname,email in fitUsers %}
+                <li>
+                    {{ name }} {{ surname }} {{ email }}
+                </li>
+                {% endfor %}
+            </ol>
+        </li>
+    {% endfor %}
+
+</ul>
+</p>
+
+
+<h1> Opcje ankiety i terminy: </h1>
 <form action="{% url 'saveSurvey' %}?adminID={{ adminID }}" method="post" class="form-signin">
     {% else %}
     <form action="{% url 'saveSurvey' %}" method="post" class="form-signin">
@@ -93,7 +140,13 @@
         {% endif %}
         </p>
 
-        <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Zaloguj</button>
+        <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">
+            {% if adminID %}
+            Zapisz zmiany (dodaj nowe pola)
+            {% else %}
+            Utwórz ankietę
+            {% endif %}
+        </button>
     </form>
 
     {% if dateTimes %}
@@ -116,6 +169,32 @@
         {% endfor %}
     });
 {% endif %}
+
+    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    copyTextareaBtn.addEventListener('click', function(event) {
+        toCopy = document.querySelector('.js-copytextarea');
+        toCopy.select();
+
+        try {
+            document.execCommand('copy');
+         } catch (err) {
+            alert("Kopiowanie do schowka nie powiodło się.");
+         }
+    });
+
+    var copyTextareaBtn2 = document.querySelector('.js-textareacopybtn2');
+
+    copyTextareaBtn2.addEventListener('click', function(event) {
+        toCopy = document.querySelector('.js-copytextarea2');
+        toCopy.select();
+
+        try {
+            document.execCommand('copy');
+         } catch (err) {
+            alert("Kopiowanie do schowka nie powiodło się.");
+         }
+    });
 
 
     </script>

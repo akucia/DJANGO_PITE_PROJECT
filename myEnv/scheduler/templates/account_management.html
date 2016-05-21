@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+
+{% if request.session.member_id %}
+
+<h1>Zarządzanie kontem</h1>
+<p>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Tutaj możesz uzyskać dostęp do stworzonych przez Ciebie ankiet oraz zmieniać ustawienia swojego konta.
+</p>
+
+{% else %}
+<h1> Nie jesteś zalogowany </h1>
+{% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+
+{% if request.session.member_id %}
+
+<h1>Informacje o koncie:</h1>
+<p>
+<table class="table-striped">
+    <tr>
+        <td style="padding:10px"><strong>Imię:</strong></td>
+        <td style="padding:10px">
+            {{ request.session.member_name }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:10px">
+            <strong>
+                Nazwisko:
+            </strong>
+        </td>
+        <td style="padding:10px">
+            {{ request.session.member_surname }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:10px">
+            <strong>
+                Konto utworzone dnia:
+            </strong>
+        </td>
+
+        <td style="padding:10px">
+            {{ signInDate }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding:10px">
+            <strong>
+                Email:
+            </strong>
+        </td>
+        <td style="padding:10px">
+            {{ email }}
+        </td>
+    </tr>
+
+</table>
+</p>
+<hr>
+
+<h1>
+    Lista ankiet:
+</h1>
+<p>
+<table class="table-striped">
+    <thead>
+    <tr>
+        <th>
+            Tytuł
+        </th>
+        <th>
+            ID administratora
+        </th>
+        <th>
+            ID wypełniającego
+        </th>
+        <th>
+            Usuń
+        </th>
+    </tr>
+    </thead>
+
+    {% for title,adminID,userID in listOfSurveys %}
+    <tr>
+        <td>
+            {{ title }}
+        </td>
+        <td>
+            <a href="./surveyManager?adminID={{ adminID }}"><strong>{{ adminID }}</strong></a>
+        </td>
+        <td>
+            <a href="./surveyAnswer?userID={{ userID }}"><strong>{{ userID }}</strong></a>
+        </td>
+
+        <td>
+            <a href="./removeElement?adminID={{ adminID }}"><span class="glyphicon glyphicon-remove-circle"></span></a>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+</p>
+
+{% else %}
+
+{% endif %}
+
+
+{% endblock %}

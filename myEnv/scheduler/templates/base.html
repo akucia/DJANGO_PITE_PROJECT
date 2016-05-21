@@ -38,13 +38,14 @@
             </div>
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'surveyManager' %}">Nowa ankieta</a></li>
-
+                <li><a href="{% url 'surveyAnswer' %}">Wypełnij ankietę</a> </li>
                 <li><a href="#">Statystyki</a></li>
 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {% if request.session.member_id %}
+                <li><a href="{% url 'accountManager' %}">Konto</a></li>
                 <li><a href="{% url 'logOut' %}">Wyloguj</a></li>
                 {% else %}
                 <li><a href="{% url 'registerView'  %}">Zarejestruj</a></li>

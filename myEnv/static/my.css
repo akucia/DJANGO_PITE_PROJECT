@@ -14,8 +14,8 @@
 
 body { padding-top: 70px; }
 
-
-
+td { padding: 10px; }
+th { padding: 10px; }
 /**
  * Bootstrap requires a containing element to wrap site contents
  * and house the grid system. You may choose one of two containers.
