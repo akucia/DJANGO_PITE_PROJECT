@@ -9,7 +9,7 @@ Wszystkie pliki projektu znajdują się w katalogu myEnv.
 - django 1.8
 - python-dateutil 
 ```
-pip install python-dateutil)
+pip install python-dateutil
 ```
 - django-picklefield-0.3.2 ( nie wymaga instalacji jest w katalogu projektu )
 
@@ -18,11 +18,15 @@ pip install python-dateutil)
 - layout strony - OK
 - logowanie i wylogowywanie - OK
 - rejestracja - OK
-- tworzenie i edycja ankiet - OK ( po zaimplementowaniu dodawania odpowiedzi trzeba zadbać o spójność udzielonych odpowiedzi z dostępnymi polami ankiety )
-- generowanie raportów 
+- tworzenie i edycja ankiet - OK (integralność zachowana przez sprawdanie kluczy )
 - dodawanie i ewentualna modyfikacja odpowiedzi - OK
 - panel do zarządzania ankietami dla usera - OK
 - tworzenie i wysyłanie raportów o odpowiedziach
-- statystyki 
+- statystyki ( dla całej witryny i userów - googleChart może się przydać ) - im więcej tym lepiej
 - ewentualna integracja ze stronami zewnętrznymi (googlecalendar ?)
-- ulepszenie front-end
+- możliwość generowania arkuszy Excella z odpowiedziami (najszybciej będzie przy pomocy formatu CSV) 
+- wysyłanie zbiorczego maila do członków ankiety
+- testy
+- generowanie raportów (może by się udało w PDF ? jak nie to w sposób taki aby ławo było je wydrukować ) 
+- ulepszenie front-end (np chowanie się potwierdzeń poprawności zapisu do bazy danych po najechaniu #jqery itp )
+- inne dodatki
