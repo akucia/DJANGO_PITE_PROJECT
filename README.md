@@ -27,6 +27,6 @@ pip install python-dateutil
 - możliwość generowania arkuszy Excella z odpowiedziami (najszybciej będzie przy pomocy formatu CSV) 
 - wysyłanie zbiorczego maila do członków ankiety
 - testy
-- generowanie raportów (może by się udało w PDF ? jak nie to w sposób taki aby ławo było je wydrukować ) 
+- generowanie raportów (może by się udało w PDF ? jak nie to w sposób taki aby ławo było je wydrukować ) wygląda przystępnie -[latex and django](https://blog.sevenbyte.org/2014/09/23/generating-pdfs-with-django-and-latex.html) 
 - ulepszenie front-end (np chowanie się potwierdzeń poprawności zapisu do bazy danych po najechaniu #jqery itp )
 - inne dodatki
