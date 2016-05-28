@@ -73,7 +73,16 @@
             </ol>
         </li>
     {% endfor %}
+    <form action="{% url 'pdfReport' %}?adminID={{ adminID }}" method="post" class="form-signin" >
 
+        <form action="{% url 'saveSurvey' %}" method="post" class="form-signin">
+
+            {% csrf_token %}
+        <button class="btn btn-default navbar-bt" type="submit" style="width: 10;">
+            Pobierz raport w pliku pdf
+        </button>
+        </form>
+    </form>
 </ul>
 </p>
 
