@@ -47,7 +47,6 @@ def surveyManager(request):
                 lastOk=True
 
         adminURL = request.build_absolute_uri(reverse('surveyManager'))+"?adminID="+row.adminID
-        #TODO dodać odpowiednie generowanie linku do ankiety dla usera !!!
         userURL = request.build_absolute_uri(reverse('surveyAnswer'))+"?userID="+row.userID
 
         listOfAnswers=[]
@@ -61,7 +60,7 @@ def surveyManager(request):
                         listOfMatches.append((answer.name,answer.surname,answer.email))
                 except:
                     pass
-            listOfAnswers.append((fromDate,toDate,listOfMatches))
+            listOfAnswers.append((fromDate,toDate,listOfMatches,len(listOfMatches)))
 
         return render(request,"survey_manager_panel.html",{'title' : row.title ,
                                                            'description' : row.description,

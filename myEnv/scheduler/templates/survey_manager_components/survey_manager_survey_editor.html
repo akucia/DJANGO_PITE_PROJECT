@@ -1,9 +1,11 @@
-<h1> Opcje ankiety i terminy: </h1>
+{% if adminID %}
+    <h1> Opcje ankiety i terminy: </h1>
     <form action="{% url 'saveSurvey' %}?adminID={{ adminID }}" method="post" class="form-signin">
-    {% else %}
+{% else %}
     <form action="{% url 'saveSurvey' %}" method="post" class="form-signin">
 
-        {% endif %}
+{% endif %}
+
         {% csrf_token %}
         <p>
             <label>Tytuł:</label>
@@ -68,3 +70,26 @@
             {% endif %}
         </button>
     </form>
+
+    {% if dateTimes %}
+    <script type="text/javascript">
+
+    $(function () {
+        {% for id1,id2,fromDate,toDate in dateTimes %}
+
+        $('#datetimepicker{{ id1 }}').datetimepicker();
+        $('#datetimepicker{{ id2 }}').datetimepicker({
+            useCurrent: false
+        });
+        $("#datetimepicker{{ id1 }}").on("dp.change", function (e) {
+            $('#datetimepicker{{ id2 }}').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker{{ id2 }}").on("dp.change", function (e) {
+            $('#datetimepicker{{ id1 }}').data("DateTimePicker").maxDate(e.date);
+        });
+
+        {% endfor %}
+    });
+{% endif %}
+
+    </script>

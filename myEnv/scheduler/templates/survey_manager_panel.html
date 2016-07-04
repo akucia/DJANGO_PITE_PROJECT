@@ -1,215 +1,32 @@
 {% extends 'base.html' %}
 
+{% block headAdds %}
+    {% include 'survey_manager_components/survey_manager_chart_head.html' %}
+{% endblock %}
+
 {% block title %}
-{% if request.session.member_id %}
-<h1>Zarządzanie i tworzenie ankiety</h1>
-<p>
-    {% if creationDate %}
-    Ankieta stworzona dnia:
-    <span class="glyphicon glyphicon-time"></span>
-    {{ creationDate }}
-    {% else %}
-    Wypełnij poniższe pola aby stworzyć nową ankietę
-    {% endif %}
-
-</p>
-{% else %}
-<h1>Bład tworzenia ankiety </h1>
-{% endif %}
-
+    {% include 'survey_manager_components/survey_manager_title_section.html' %}
 {% endblock %}
 
 {% block content %}
-{% if request.session.member_id %}
+    {% if request.session.member_id %}
 
-{% if adminID %}
-
-{% if lastOk == True %}
-<div class="alert alert-success">
-    <strong>Success!</strong> Ostatnie zmiany zostały pomyślnie wprowadzone do bazy danych .
-</div>
-{% endif %}
-
-{% if adminID and userID %}
-<h1> Dane dostępu do ankiety: </h1>
-<p>
-<ul>
-    <li>
-        Identywikator administratora: <strong>{{ adminID }}</strong>.
-    </li>
-    <li>
-        Link do zarządzania ankietą:
-        <input class="js-copytextarea" readonly="readonly" value="{{ adminURL }}">
-        <button class="js-textareacopybtn"><span class="glyphicon glyphicon-duplicate"></span></button>
-    </li>
-    <li>
-        Identyfikator dla odpowiadajcych: <strong>{{ userID }}</strong>
-    </li>
-    <li>
-        Link dla ankietowanych:
-        <input class="js-copytextarea2" readonly="readonly" value="{{ userURL }}">
-        <button class="js-textareacopybtn2"><span class="glyphicon glyphicon-duplicate"></span></button>
-    </li>
-</ul>
-</p>
-
-{% endif %}
-<h1>
-    Odpowiedzi:
-</h1>
-<p>
-<ul>
-    {% for fromDate,toDate,fitUsers in answerDates %}
-        <li>
-            <strong>
-                {{ fromDate }} - {{ toDate }}
-            </strong>
-            <ol>
-                {% for name,surname,email in fitUsers %}
-                <li>
-                    {{ name }} {{ surname }} {{ email }}
-                </li>
-                {% endfor %}
-            </ol>
-        </li>
-    {% endfor %}
-    <form action="{% url 'pdfReport' %}?adminID={{ adminID }}" method="post" class="form-signin" >
-
-        <form action="{% url 'saveSurvey' %}" method="post" class="form-signin">
-
-            {% csrf_token %}
-        <button class="btn btn-default navbar-bt" type="submit" style="width: 10;">
-            Pobierz raport w pliku pdf
-        </button>
-        </form>
-    </form>
-</ul>
-</p>
-
-
-<h1> Opcje ankiety i terminy: </h1>
-<form action="{% url 'saveSurvey' %}?adminID={{ adminID }}" method="post" class="form-signin">
-    {% else %}
-    <form action="{% url 'saveSurvey' %}" method="post" class="form-signin">
-
+        {% if lastOk == True %}
+            <div class="alert alert-success">
+                <strong>Success!</strong> Ostatnie zmiany zostały pomyślnie wprowadzone do bazy danych .
+            </div>
         {% endif %}
-        {% csrf_token %}
-        <p>
-            <label>Tytuł:</label>
-            <input name="title" type="text" id="inputEmail" class="form-control" placeholder="Nazwa wydarzenia" required
-                   autofocus value="{{ title }}">
-            <label>Opis:</label>
 
-        <textarea name="description" class="form-control" rows="5" id="comment"
-                  placeholder="Szczegółowy opis wydarzenia" required>{{ description }}</textarea>
+        {% include 'survey_manager_components/survey_manager_survey_access_details.html' %}
 
-            {% if dateTimes %}
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Od:</th>
-                <th>Do:</th>
-            </tr>
-            </thead>
-            <tbody>
+        {% include 'survey_manager_components/survey_manager_answers_sum_up.html' %}
 
-            <!--
-            Przykładowa konfiguracja
-                id1 - seria liczb 0,2,4,6
-                id2 - seria liczb 1,3,5,7
-                fromDate - daty (może być None) dal serii id1
-                toDate - daty (może być None) dla serii id2
-            -->
-            {% for id1,id2,fromDate,toDate in dateTimes %}
+        {% include 'survey_manager_components/survey_manager_survey_editor.html' %}
 
-            <tr>
-                <td>
-                    <div class='input-group date' id='datetimepicker{{ id1 }}'>
-                        <input type='text' class="form-control" name="dateTimeFrom{{ id1 }}"
-                               value="{{ fromDate|date:'m/d/Y h:iA'  }}"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-                    </div>
-                </td>
-                <td>
-                    <div class='input-group date' id='datetimepicker{{ id2 }}'>
-                        <input type='text' class="form-control" name="dateTimeTo{{ id1 }}"
-                               value="{{ toDate|date:'m/d/Y h:iA'  }}"/>
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-                    </div>
-                </td>
-            </tr>
-
-            {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-        </p>
-
-        <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">
-            {% if adminID %}
-            Zapisz zmiany (dodaj nowe pola)
-            {% else %}
-            Utwórz ankietę
-            {% endif %}
-        </button>
-    </form>
-
-    {% if dateTimes %}
-    <script type="text/javascript">
-
-    $(function () {
-        {% for id1,id2,fromDate,toDate in dateTimes %}
-
-        $('#datetimepicker{{ id1 }}').datetimepicker();
-        $('#datetimepicker{{ id2 }}').datetimepicker({
-            useCurrent: false
-        });
-        $("#datetimepicker{{ id1 }}").on("dp.change", function (e) {
-            $('#datetimepicker{{ id2 }}').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datetimepicker{{ id2 }}").on("dp.change", function (e) {
-            $('#datetimepicker{{ id1 }}').data("DateTimePicker").maxDate(e.date);
-        });
-
-        {% endfor %}
-    });
-{% endif %}
-
-    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
-    copyTextareaBtn.addEventListener('click', function(event) {
-        toCopy = document.querySelector('.js-copytextarea');
-        toCopy.select();
-
-        try {
-            document.execCommand('copy');
-         } catch (err) {
-            alert("Kopiowanie do schowka nie powiodło się.");
-         }
-    });
-
-    var copyTextareaBtn2 = document.querySelector('.js-textareacopybtn2');
-
-    copyTextareaBtn2.addEventListener('click', function(event) {
-        toCopy = document.querySelector('.js-copytextarea2');
-        toCopy.select();
-
-        try {
-            document.execCommand('copy');
-         } catch (err) {
-            alert("Kopiowanie do schowka nie powiodło się.");
-         }
-    });
-
-
-    </script>
     {% else %}
     <p>
         Aby móc tworzyć ankiety musisz się zalogowac lub utworzyć bezpłatne konto.
     </p>
     {% endif %}
-    {% endblock %}
+
+{% endblock %}
