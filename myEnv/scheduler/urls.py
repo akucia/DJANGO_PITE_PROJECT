@@ -20,6 +20,5 @@ urlpatterns = [
     url(r'^surveyAnswer',surveyAnswer,name="surveyAnswer"),
     url(r'^saveAnswer',saveAnswer,name="saveAnswer"),
     url(r'^accountManager',accountManager,name="accountManager"),
-
     url(r'^removeElement',removeElement,name="removeElement")
 ]

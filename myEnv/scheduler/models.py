@@ -25,6 +25,7 @@ class Survey(models.Model):
     creation_date = models.DateTimeField(default=datetime.now, blank=True)
     userID = models.CharField(max_length=10,blank=False)
     adminID = models.CharField(max_length=10,blank=False)
+    active = models.BooleanField(blank=True, default=True)
 
 
 class Answer(models.Model):
