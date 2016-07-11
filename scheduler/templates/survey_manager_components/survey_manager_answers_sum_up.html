@@ -1,0 +1,126 @@
+{% if adminID %}
+    <h1>
+        Odpowiedzi      {% if answerDates %}
+                        <span id="answerSumUpUp" class="glyphicon glyphicon-chevron-up" aria-hidden="true" ></span>
+                        <span id="answerSumUpDown" class="glyphicon glyphicon-chevron-down" aria-hidden="true" ></span>
+                        {% endif %}
+        :
+    </h1>
+
+    <div id="answerSumUp">
+    <ul>
+        {% if answerDates %}
+            {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
+                {% if fitUsers %}
+                <li>
+
+                    <strong>
+                        {{ fromDate }} - {{ toDate }}
+                    </strong>
+
+                    <table class="table-striped">
+                        <thead>
+                            <td>
+                                <strong>imię</strong>
+                            </td>
+                            <td>
+                                <strong>nazwisko</strong>
+                            </td>
+                            <td>
+                                <strong>e-mail</strong>
+                            </td>
+
+                        </thead>
+                        {% for name,surname,email in fitUsers %}
+                        <tr>
+                            <td>
+                                {{ name }}
+                            </td>
+                            <td>
+                                {{ surname }}
+                            </td>
+                            <td>
+                                {{ email }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info" role="alert">Nie udzielono jeszcze żadnych odpowiedzi</div>
+        {% endif %}
+    </ul>
+
+
+    </div>
+
+    {% if answerDates %}
+    {% include 'survey_manager_components/survey_manager_chart_head.html' %}
+
+    <div class="chartArea" id="piechart" ></div>
+
+    <div class="closeButtonForChart" id="closeButton">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>
+
+    <script >
+    $(document).ready(function(){
+        $("#showChart").click(function(){
+            $("#piechart").css("visibility","visible");
+            $("#closeButton").css("visibility","visible");
+        });
+
+        $("#closeButton").click(function(){
+            $("#piechart").css("visibility","hidden");
+            $("#closeButton").css("visibility","hidden");
+        });
+
+        $('#showCSVReport').click(function() {
+            window.location.href = "{% url 'csvReport' %}?adminID={{ adminID }}";
+        });
+
+        $("#answerSumUpUp").click(function(){
+            $("#answerSumUpUp").hide();
+            $("#answerSumUp").hide();
+            $("#answerSumUpDown").show();
+        });
+
+        $("#answerSumUpDown").click(function(){
+            $("#answerSumUpUp").show();
+            $("#answerSumUp").show();
+            $("#answerSumUpDown").hide();
+        });
+
+        $("#answerSumUpDown").hide();
+
+    });
+    </script>
+    <table>
+        <tr>
+            <td>
+                <button type="button" id="showChart" class="btn btn-default" >
+                    Pokaż wykres
+                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </button>
+                <noscript>
+
+                </noscript>
+            </td>
+            <td>
+                <button type="button" id="showCSVReport" class="btn btn-default" >
+                    Wygeneruj raport CSV
+                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </button>
+                <noscript>
+                    <a href="{% url 'csvReport' %}?adminID={{ adminID }}">Wygeneruj raport CSV</a>
+                </noscript>
+
+            </td>
+        </tr>
+    </table>
+
+    {% endif %}
+{% endif %}

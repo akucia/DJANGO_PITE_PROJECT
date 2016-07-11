@@ -1,0 +1,72 @@
+{% if adminID and userID %}
+<h1> Dane dostępu do ankiety: </h1>
+<p>
+<table class="table-striped">
+    <tr>
+        <td>
+            Identywikator administratora:
+        </td>
+        <td>
+            <strong>{{ adminID }}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        Link do zarządzania ankietą:
+        </td>
+        <td>
+            <input class="js-copytextarea" readonly="readonly" value="{{ adminURL }}">
+            <button class="js-textareacopybtn"><span class="glyphicon glyphicon-duplicate"></span></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Identyfikator dla odpowiadajcych:
+        </td>
+        <td>
+            <strong>{{ userID }}</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Link dla ankietowanych:
+        </td>
+        <td>
+            <input class="js-copytextarea2" readonly="readonly" value="{{ userURL }}">
+            <button class="js-textareacopybtn2"><span class="glyphicon glyphicon-duplicate"></span></button>
+        </td>
+    </tr>
+</table>
+</p>
+
+<script type="text/javascript">
+
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    copyTextareaBtn.addEventListener('click', function(event) {
+        toCopy = document.querySelector('.js-copytextarea');
+        toCopy.select();
+
+        try {
+            document.execCommand('copy');
+         } catch (err) {
+            alert("Kopiowanie do schowka nie powiodło się.");
+         }
+    });
+
+    var copyTextareaBtn2 = document.querySelector('.js-textareacopybtn2');
+
+    copyTextareaBtn2.addEventListener('click', function(event) {
+        toCopy = document.querySelector('.js-copytextarea2');
+        toCopy.select();
+
+        try {
+            document.execCommand('copy');
+         } catch (err) {
+            alert("Kopiowanie do schowka nie powiodło się.");
+         }
+    });
+
+
+    </script>
+{% endif %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<h1>{{ title }}</h1>
+<p>
+    Ankieta utworzona dnia:
+    <span class="glyphicon glyphicon-time"></span>
+    {{ creationDate }}
+</p>
+{% endblock %}
+
+{% block content %}
+
+<p>
+    <strong>Opis:</strong>
+    {{ description }}
+</p>
+
+<h1>
+    Wypełnij formularz:
+</h1>
+
+{% if answerID %}
+<p>
+    <strong>ID odpowiedzi</strong>
+    (umożliwia edycję odpowiedzi w przyszłości):
+    <strong>{{ answerID }}</strong>
+
+    <input class="js-copytextarea" readonly="readonly" value="{{ editURL }}"> </input>
+    <button class="js-textareacopybtn"><span class="glyphicon glyphicon-duplicate"></span></button>
+
+    <script type="text/javascript">
+    var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+    copyTextareaBtn.addEventListener('click', function(event) {
+        toCopy = document.querySelector('.js-copytextarea');
+        toCopy.select();
+
+        try {
+            document.execCommand('copy');
+         } catch (err) {
+            alert("Kopiowanie do schowka nie powiodło się.");
+         }
+    });
+    </script>
+</p>
+
+
+{% endif %}
+
+<p>
+    <form action="{% url 'saveAnswer' %}" method="post" class="form-signin">
+        {% csrf_token %}
+<p>
+    <input type="hidden" name="userID" value="{{ userID }}">
+    {% if answerID %}
+    <input type="hidden" name="answerID" value="{{ answerID }}">
+    {% endif %}
+
+    <label>Imię:</label>
+
+    <input name="name" type="text" class="form-control" placeholder="imię" required
+           autofocus value="{{ name }}">
+
+    <label>Nazwisko:</label>
+    <input name="surname" type="text" class="form-control" placeholder="nazwisko" required
+           autofocus value="{{ surname }}">
+
+
+    <label>E-mail:</label>
+    <input name="email" type="email" class="form-control" placeholder="adres e-mail" required
+           autofocus value="{{ email }}">
+
+<table class="table-striped">
+    <thead>
+    <tr>
+        <th>Od:</th>
+        <th>Do:</th>
+        <th>Dostępność</th>
+    </tr>
+    </thead>
+
+    {% for fromDate,toDate,active in dateTimes %}
+    <tr>
+        <td style="padding:10px">{{ fromDate }}</td>
+        <td style="padding:10px">{{ toDate }}</td>
+        <td style="padding:10px">
+            <input type="checkbox" name="{{ fromDate }}|{{ toDate }}"
+                   {% if active %}
+                   checked="checked"
+                   {% endif %}>
+        </td>
+    </tr>
+
+    {% endfor %}
+    <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">
+        Zapisz odpowiedź.
+    </button>
+</table>
+</form>
+
+</p>
+{% endblock %}

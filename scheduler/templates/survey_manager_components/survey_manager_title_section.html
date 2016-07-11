@@ -1,0 +1,15 @@
+{% if request.session.member_id %}
+<h1>Zarządzanie i tworzenie ankiety</h1>
+<p>
+    {% if creationDate %}
+    Ankieta stworzona dnia:
+    <span class="glyphicon glyphicon-time"></span>
+    {{ creationDate }}
+    {% else %}
+    Wypełnij poniższe pola aby stworzyć nową ankietę
+    {% endif %}
+
+</p>
+{% else %}
+<h1>Bład tworzenia ankiety </h1>
+{% endif %}
