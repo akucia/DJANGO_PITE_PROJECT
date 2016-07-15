@@ -7,6 +7,7 @@ from .views_set.survey_answer_control import saveAnswer, surveyAnswer
 from .views_set.account_manager import accountManager,removeElement
 from .views_set.pdf_report import pdfReport
 from .views_set.csv_report import csvReport
+from .views_set.html_report import htmlReport
 
 urlpatterns = [
     url(r'^$', main, name='main_view'),
@@ -15,12 +16,14 @@ urlpatterns = [
     url(r'^registerView$', registerView, name='registerView'),
     url(r'^registerRequest$', registerRequest, name='registerRequest'),
     url(r'^surveyManager', surveyManager, name='surveyManager'),
-    url(r'^report', pdfReport, name='pdfReport'),
 
     url(r'^saveSurvey',saveSurvey,name="saveSurvey"),
     url(r'^surveyAnswer',surveyAnswer,name="surveyAnswer"),
     url(r'^saveAnswer',saveAnswer,name="saveAnswer"),
     url(r'^accountManager',accountManager,name="accountManager"),
     url(r'^removeElement',removeElement,name="removeElement"),
-    url(r"^csv_report",csvReport,name="csvReport")
+
+    url(r"^csv_report",csvReport,name="csvReport"),
+    url(r'^pdf_report', pdfReport, name='pdfReport'),
+    url(r'^html_report', htmlReport, name='htmlReport'),
 ]
