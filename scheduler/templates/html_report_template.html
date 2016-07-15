@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    table {
+    border: 2px solid black;
+    border-collapse: collapse;
+    width = 100%;
+    }
+    td {
+        padding: 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid black;
+
+    }
+
+</style>
+</head>
+<body>
+
+<h1> {{ title }} </h1>
+
+
+<table>
+
+    <tr>
+        <th> Od </th>
+        <th> Do </th>
+        <th> Członkowie </th>
+        <th> e-mail </th>
+    </tr>
+    {% for fromDate,toDate,fitUsers in answerDates %}
+    <tr>
+        <td> {{ fromDate }} </td>
+        <td>{{ toDate }} </td>
+        <td></td>
+        <td></td>
+        {% for name,surname, email in fitUsers %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td> {{ name }}  {{ surname }} </td>
+            <td> {{ email }} </td>
+        </tr>
+    </tr>
+
+        {% endfor %}
+    {% endfor %}
+
+</table>
+
+<p>
+
+
+</p>
+<button onclick="myFunction()">Drukuj</button>
+
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+
+</body>
+</html>
+
