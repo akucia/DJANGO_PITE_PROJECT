@@ -112,13 +112,26 @@
             <td>
                 <button type="button" id="showCSVReport" class="btn btn-default" >
                     Wygeneruj raport CSV
-                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                 </button>
                 <noscript>
                     <a href="{% url 'csvReport' %}?adminID={{ adminID }}">Wygeneruj raport CSV</a>
                 </noscript>
 
             </td>
+
+
+            <td>
+                <a href="{% url 'htmlReport' %}?adminID={{ adminID }}"  class="btn btn-default" >
+                    Drukuj
+                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                </a>
+
+
+
+
+            </td>
+
         </tr>
     </table>
 
