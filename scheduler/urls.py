@@ -10,6 +10,7 @@ from .views_set.csv_report import csvReport
 from .views_set.html_report import htmlReport
 from .views_set.website_stat_control import websiteStatManager
 from .views_set.contact_control import contactManager,sendMail
+from .views_set.terms_and_conditions import termsAndConditions
 
 urlpatterns = [
     url(r'^$', main, name='main_view'),
@@ -31,6 +32,8 @@ urlpatterns = [
 
     url(r'^websiteStatManager',websiteStatManager,name="websiteStatManager"),
     url(r'^contactManager',contactManager,name="contactManager"),
-    url(r'^sendMail',sendMail,name="sendMail")
+    url(r'^sendMail',sendMail,name="sendMail"),
+
+    url(r'^termsAndConditions',termsAndConditions,name="termsAndConditions"),
 
 ]
