@@ -14,7 +14,7 @@ class SurveyUser(models.Model):
     hash_of_password = models.TextField(blank=False)
 
     def __str__(self):
-        return '{}'.format(self.email)
+        return '{email}'.format(email=self.email)
 
 
 class Survey(models.Model):
@@ -27,6 +27,10 @@ class Survey(models.Model):
     adminID = models.CharField(max_length=10,blank=False)
     active = models.BooleanField(blank=True, default=True)
 
+    def __str__(self):
+        return '{email} => {title}'.format(email=self.user.email,title=self.title)
+
+
 
 class Answer(models.Model):
     survey = models.ForeignKey(Survey, on_delete=models.CASCADE, blank=False)
@@ -36,3 +40,6 @@ class Answer(models.Model):
     answerID = models.CharField(max_length=10, blank=False)
     answer = PickledObjectField(blank=False)
     creation_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return '{survey} => {email}'.format(survey=self.survey,email=self.email)
