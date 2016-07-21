@@ -8,6 +8,8 @@ from .views_set.account_manager import accountManager,removeElement
 from .views_set.pdf_report import pdfReport
 from .views_set.csv_report import csvReport
 from .views_set.html_report import htmlReport
+from .views_set.website_stat_control import websiteStatManager
+from .views_set.contact_control import contactManager,sendMail
 
 urlpatterns = [
     url(r'^$', main, name='main_view'),
@@ -26,4 +28,9 @@ urlpatterns = [
     url(r"^csv_report",csvReport,name="csvReport"),
     url(r'^pdf_report', pdfReport, name='pdfReport'),
     url(r'^html_report', htmlReport, name='htmlReport'),
+
+    url(r'^websiteStatManager',websiteStatManager,name="websiteStatManager"),
+    url(r'^contactManager',contactManager,name="contactManager"),
+    url(r'^sendMail',sendMail,name="sendMail")
+
 ]

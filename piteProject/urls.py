@@ -7,5 +7,6 @@ urlpatterns = [
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('scheduler.urls')),
+    url(r'^captcha/', include('captcha.urls')),
 
 ]

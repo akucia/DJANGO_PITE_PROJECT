@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
+{% block headAdds %}
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+ </script>
+
+{% endblock %}
+
 {% block title %}
 
 
@@ -14,8 +22,6 @@
 {% else %}
 <h1> Nie jesteś zalogowany </h1>
 {% endif %}
-
-
 {% endblock %}
 
 {% block content %}
@@ -109,6 +115,65 @@
     {% endfor %}
 </table>
 </p>
+
+
+<h1>
+    Statystyki:
+</h1>
+
+<p>
+    <table class="table-striped">
+        <tr>
+            <td style="padding:10px"><strong>Ilość dni od czasu rejestracji:</strong></td>
+            <td style="padding:10px">
+                {{ daySinceRegister }}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:10px"><strong>Liczba utworzonych ankiet:</strong></td>
+            <td style="padding:10px">
+                {{ numberOfSurveys }}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:10px"><strong>W tym utworzonych ostatnio:</strong></td>
+            <td style="padding:10px">
+                {{ numberOfRecentS }}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:10px"><strong>Data utworzenia ostatniej ankiety:</strong></td>
+            <td style="padding:10px">
+                {{ mostRecentSurvey }}
+            </td>
+        </tr>
+    </table>
+</p>
+
+
+
+<script type="text/javascript">
+      google.charts.setOnLoadCallback(drawChart_ac_s);
+function drawChart_ac_s() {
+        var data_from_django = {{ plotData|safe }};
+        var data = google.visualization.arrayToDataTable(data_from_django);
+
+
+        var options = {
+          title: 'Ilosc wyslanych ankiet w ciągu ostatnich 10 dni',
+
+          legend: { position: 'bottom' }
+
+        };
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        chart.draw(data, options);
+
+}
+</script>
+
+
+<div id="curve_chart" style="width: 900px; height: 500px"></div>
+
 
 {% else %}
 

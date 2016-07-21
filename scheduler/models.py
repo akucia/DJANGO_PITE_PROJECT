@@ -35,3 +35,4 @@ class Answer(models.Model):
     email = models.EmailField(blank=False)
     answerID = models.CharField(max_length=10, blank=False)
     answer = PickledObjectField(blank=False)
+    creation_date = models.DateTimeField(default=datetime.now, blank=True)

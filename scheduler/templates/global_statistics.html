@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% block headAdds %}
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+ </script>
+
+{% endblock %}
+
+{% block title %}
+<h1>Statystki strony</h1>
+<p>
+	<span class="glyphicon glyphicon-info-sign"></span>
+	Garść ważniejszych informacji na temat strony.
+</p>
+{% endblock %}
+
+{% block content %}
+<h1>Użytkownicy: </h1>
+<p>
+<table class="table-striped">
+	<tr>
+		<td style="padding:10px"><strong>Liczba użytkowników:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfUsers }}
+	</td>
+	</tr>
+	<tr>
+		<td style="padding:10px"><strong>Zarejestrowanych dzisiaj:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfUsersToday }}
+	</td>
+	</tr>
+	<tr>
+		<td style="padding:10px"><strong>Najnowszy użytkownik(Serdecznie Witamy!):</strong></td>
+		<td style="padding:10px">
+		{{ mostRecentUser }}
+	</td>
+	</tr>
+</table>
+
+</p>
+<p>
+<script type="text/javascript">
+google.charts.setOnLoadCallback(drawChart_u);
+function drawChart_u() {
+        
+        var data_from_django = {{ userPlot|safe }};
+        data=google.visualization.arrayToDataTable(data_from_django);
+        var options = {
+          title: 'Ilość rejestracji uzytkownikow w ciagu ostatnich 10 dni',
+          vAxis: {title: 'Ilość'},
+	  legend: { position: 'bottom' },
+          isStacked: true
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart3'));
+
+        chart.draw(data, options);
+
+        
+}
+</script>
+
+
+<div id="chart3" style=" width: 700px; height: 300px " ></div>	
+</p>
+
+<hr>
+
+<h1>Ankiety: </h1>
+<p>
+<table class="table-striped">
+	<tr>
+		<td style="padding:10px"><strong>Całkowita liczba Ankiet:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfSurveys}}
+	</td>
+	</tr>
+	<tr>
+		<td style="padding:10px"><strong>Liczba ankiet założonych dzisiaj:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfSurveysToday}}
+	</td>
+	</tr>
+       <tr>
+		<td style="padding:10px"><strong>Najnowsza Ankieta:</strong></td>
+		<td style="padding:10px">
+		{{ mostRecentSurvey}}
+	</td>
+	</tr>
+
+</table>
+</p>
+<p>
+<script type="text/javascript">
+      google.charts.setOnLoadCallback(drawChart_s);
+
+
+        function drawChart_s() {
+        
+        var data_from_django = {{ surveyPlot|safe }};
+        data=google.visualization.arrayToDataTable(data_from_django);
+        var options = {
+          title: 'Ilość utworzonych ankiet w ciągu ostatnich 10 dni',
+          vAxis: {title: 'Ilość'},
+          legend: { position: 'bottom' },
+          isStacked: true
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart1'));
+
+        chart.draw(data, options);
+
+        
+}
+</script>
+<div id="chart1" style=" width: 700px; height: 300px " ></div>
+
+</p>
+<hr>
+<h1>Odpowiedzi: </h1>
+<p>
+<table class="table-striped">
+	<tr>
+		<td style="padding:10px"><strong>Liczba wszystkich Odpowiedzi:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfAnswers}}
+	</td>
+	</tr>
+	<tr>
+		<td style="padding:10px"><strong>Liczba odpowiedzi udzielonych dzisiaj:</strong></td>
+		<td style="padding:10px">
+		{{ numberOfAnswersToday}}
+	</td>
+	</tr>
+</table>
+</p>
+<p>
+<script type="text/javascript">
+google.charts.setOnLoadCallback(drawChart1);
+function drawChart1() {
+        
+        var data_from_django = {{ answerPlot|safe }};
+        data=google.visualization.arrayToDataTable(data_from_django);
+        var options = {
+          title: 'Ilość udzielonych odpowiedzi w ciągu ostatnich 10 dni',
+          vAxis: {title: 'Ilość'},
+          legend: { position: 'bottom' },
+          isStacked: true
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart2'));
+
+        chart.draw(data, options);
+
+        
+}
+</script>
+
+
+<div id="chart2" style=" width: 700px; height: 300px " ></div>	
+</p>
+{% endblock %}

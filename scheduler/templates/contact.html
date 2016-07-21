@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+
+<h1>Kontakt z Administracją</h1>
+<p>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Masz jakieś uwagi,pytania? A może znalazłeś jakieś błędy?
+</p>
+<p>
+    Napisz do nas!
+</p>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if lastOk == True %}
+<div class="alert alert-success">
+    <strong>Success!</strong> Dziękujemy za skontatkowanie się z nami. Odpowiedź otrzymasz najszybciej jak się da.
+</div>
+{% endif %}
+{% if lastOk == False %}
+<div class="alert alert-danger">
+    <strong>Error!</strong> Podano niepoprawny kod z obrazka lub wystąpił inny błąd.
+</div>
+{% endif %}
+<p>
+    <font size="5">Skontaktuj się z nami bezpośrednio:</font>
+</p>
+<p>
+    <a href="mailto:admin@pite.com?Subject=Pite%20Project"><strong>
+        <font size="4">
+            admin@pite.com
+        </font>
+    </strong>
+    </a>
+</p>
+<p>
+    <font size="5">lub wypełnij poniższy formularz:</font>
+</p>
+{% if request.session.member_id %}
+<form action="{% url 'sendMail' %}" method="post" class="form-signin">
+    {% csrf_token %}
+    <p>
+        <label>Email:</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" value={{email}}
+               placeholder="Email address" required
+               autofocus>
+
+        <label>Name:</label>
+        <input name="name" type="text" id="inputName" class="form-control" value={{ request.session.member_name }}
+               placeholder="Name" required>
+        <label>Surname:</label>
+        <input name="surname" type="text" id="inputSurname" class="form-control" value={{ request.session.member_surname
+               }} placeholder="Surname" required>
+        <label>Subject:</label>
+        <input name="topic" type="text" id="inputTopic" class="form-control" placeholder="Subject" required>
+        <label>Treść:</label>
+        <textarea rows="10" cols="80" name="text" type="text" id="inputText" class="form-control" placeholder="Text"
+                  required></textarea>
+
+        {{ form }}
+        <input type="submit" name="respond" value="submit" class="btn btn-default navbar-bt"
+               onClick="return validate()"/>
+</form>
+{% else %}
+<form action="{% url 'sendMail' %}" method="post" class="form-signin">
+    {% csrf_token %}
+        <label>Email:</label>
+        <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required
+               autofocus>
+
+        <label>Name:</label>
+        <input name="name" type="text" id="inputName" class="form-control" placeholder="Name" required>
+        <label>Surname:</label>
+        <input name="surname" type="text" id="inputSurname" class="form-control" placeholder="Surname" required>
+        <label>Subject:</label>
+        <input name="topic" type="text" id="inputTopic" class="form-control" placeholder="Subject" required>
+        <label>Treść:</label>
+        <textarea rows="10" cols="80" name="text" type="text" id="inputText" class="form-control" placeholder="Text"
+                  required></textarea>
+
+        {{ form }}
+
+        <input type="submit" name="respond" value="captcha" class="btn btn-default navbar-bt"
+               onClick="return validate()"/>
+        <input type="submit" name="respond" value="submit" class="btn btn-default navbar-bt"
+               onClick="return validate()"/>
+</form>
+{% endif %}
+
+{% endblock %}
