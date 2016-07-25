@@ -31,7 +31,6 @@ urlpatterns = [
 
     url(r'^websiteStatManager',websiteStatManager,name="websiteStatManager"),
     url(r'^contactManager',contactManager,name="contactManager"),
-    url(r'^sendMail',sendMail,name="sendMail"),
-    url(r'^changePassword',changePassword,name="changePassword")
-	
+    url(r'^sendMail',sendMail,name="sendMail")
+
 ]
