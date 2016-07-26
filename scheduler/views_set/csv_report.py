@@ -7,7 +7,7 @@ import tempfile
 from django.shortcuts import render
 from ..models import *
 import csv
-
+import re
 
 
 def csvReport(request):
@@ -34,7 +34,8 @@ def csvReport(request):
             listOfAnswers.append((fromDate,toDate,listOfMatches))
 
         response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="report.csv" '
+
+        response['Content-Disposition'] = "attachment; filename=report.csv"
         writer = csv.writer(response)
 
         writer.writerow([row.title])
