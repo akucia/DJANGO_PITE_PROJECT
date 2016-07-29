@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+
+{% load menu %}
 {% block headAdds %}
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
  <script type="text/javascript">
@@ -43,7 +45,14 @@
 </div>
 {% endif %}
 
-
+{% generate_menu %}
+{% with menu=menus.main %}
+<div class="list-group">
+{% for item in menu %}
+    <a href="{{ item.url }}" class="list-group-item">{{ item.title }}</a>
+ {% endfor %}
+</div>
+{% endwith %}
 
 
 {% if request.session.member_id %}
