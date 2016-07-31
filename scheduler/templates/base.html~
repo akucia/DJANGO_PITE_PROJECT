@@ -43,7 +43,6 @@
                 <li><a href="{% url 'surveyAnswer' %}">Wypełnij ankietę</a> </li>
                 <li><a href="{% url 'websiteStatManager' %}">Statystyki</a></li>
                 <li><a href="{% url 'contactManager'  %}">Kontakt</a></li>
-                <li><a href="{% url 'termsAndConditions'  %}">Regulamin</a></li>
 
             </ul>
 
@@ -121,19 +120,31 @@
                     </div>
                 </div>
             </div>
+            {% elif swap_LoginPanel_to_accountmanager_menu == True %}
+            <div class=col-sm-4>
+                <div class="panel panel-default">
+                    <div class=panel-heading>
+                        <h4 class=panel-title>
+                            Opcje
+                        </h4>
+                    </div>
+                    <div class=panel-body>
+                        {% if request.session.member_id %}
+                            <p>
+                                <span class="glyphicon glyphicon-user"></span>
+                             {{ request.session.member_name }} {{ request.session.member_surname }}
+                            </p>
+
+                        {% else %}
+                            {% include 'login_panel.html' %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
             {% endif %}
-
-            {% block additionalMenus %}
-            {% endblock %}
-
-
         </div>
     </div>
 
 </div>
-
-<p>
-
-</p>
 </body>
 </html>

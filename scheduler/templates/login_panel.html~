@@ -21,6 +21,3 @@
 <p>Zapomniałeś hasła? 
 <a href="{% url 'changePassword' %}">Odzyskaj hasło</a>
 </p>
-<p>Nie masz konta?
-<a href="{% url 'registerView' %}">Stwórz darmowe konto</a>
-</p>

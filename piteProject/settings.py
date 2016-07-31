@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'scheduler',
     'captcha',
+    'menu',
 )
 
 MIDDLEWARE_CLASSES = (

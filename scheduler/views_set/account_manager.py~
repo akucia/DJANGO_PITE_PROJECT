@@ -44,21 +44,18 @@ def accountManager_changeUserdata(request):
 				return render(request, 'account_management.html', {
 				'website_type':'changeUserdata',
 				'success_token':'Dane zostały zmienione pomyślnie.',
-				'hideLoginPanel': True,
-				'swap_LoginPanel_to_accountmanager_menu' : True,})
+				'hideLoginPanel': True,})
 	
 			except:
 				
 				return render(request, 'account_management.html', {
 					'website_type':'changeUserdata',
 					'error_token':'wystąpił błąd podczas zmieniania danych.',
-					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,})
+					'hideLoginPanel': True,})
 					
 		return render(request, 'account_management.html', {
 					'website_type':'changeUserdata',
-					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,})
+					'hideLoginPanel': True,})
 
 
 def accountManager_changeUserpassword(request):
@@ -70,26 +67,22 @@ def accountManager_changeUserpassword(request):
 				return render(request, 'account_management.html', {
 					'website_type':'changeUserpassword',
 					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,
-					'error_token':'Podane niewłaściwe hasło',})
+					'error_token':'Podane niewłaściwe hasło'})
 			if request.POST['pass'] != request.POST['rpass']:
 				return render(request, 'account_management.html', {
 					'website_type':'changeUserpassword',
 					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,
-					'error_token':'Podane nowe hasła się nie zgadzają',})
+					'error_token':'Podane nowe hasła się nie zgadzają'})
 			user.hash_of_password=make_password(password=request.POST['pass'],salt=None,hasher='unsalted_md5')
 			user.save()
 			return render(request, 'account_management.html', {
 					'website_type':'changeUserpassword',
 					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,
 					'success_token':'Hasło zostało zmienione pomyślnie'})
 		else:
 			return render(request, 'account_management.html', {
 					'website_type':'changeUserpassword',
-					'hideLoginPanel': True,
-					'swap_LoginPanel_to_accountmanager_menu' : True,})
+					'hideLoginPanel': True,})
 
 
 
@@ -107,8 +100,7 @@ def accountManager_userSurveys(request):
 	return render(request, 'account_management.html', 
 	{'listOfSurveys': listOfSurveys, 
 	 'website_type' :'userSurveys',
-	 'hideLoginPanel': True,
-	 'swap_LoginPanel_to_accountmanager_menu' : True,})
+	 'hideLoginPanel': True,})
 
 
 
@@ -149,7 +141,6 @@ def accountManager_userActivity(request):
 			return render(request, 'account_management.html', {
                                                                'listOfSurveys': listOfSurveys,
                                                                'hideLoginPanel': True,
-                                                               'swap_LoginPanel_to_accountmanager_menu' : True,
                                                                'daySinceRegister': daySinceRegister,
                                                                'mostRecentSurvey': mostRecentSurvey,
                                                                'numberOfSurveys': numberOfSurveys,

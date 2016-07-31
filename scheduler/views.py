@@ -10,4 +10,3 @@ from django.core.urlresolvers import reverse
 def main(request):
     return render(request, 'main.html')
 
-
