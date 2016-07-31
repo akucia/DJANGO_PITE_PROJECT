@@ -116,6 +116,9 @@
 </form>
 {% endif %}
 
+
+
+
 {% if website_type == "changeUserpassword" %}
 <form action="{% url 'am_changeUserpassword' %}" method="post">
 {% csrf_token %}
@@ -234,9 +237,33 @@ function drawChart_ac_s() {
 
 
 {% else %}
-
 {% endif %}
-
 {% endif %}
-
 {% endblock %}
+
+
+{% if request.session.member_id %}
+{% block additionalMenus %}
+
+{% load menu %}
+            <div class=col-sm-4>
+                <div class="panel panel-default">
+                    <div class=panel-heading>
+                        <h4 class=panel-title>
+                            Opcje
+                        </h4>
+                    </div>
+                    <div class=panel-body>
+                       {% generate_menu %}
+								{% with menu=menus.main %}
+								<div class="list-group">
+								{% for item in menu %}
+                                    <a href="{{ item.url }}" class="list-group-item">{{ item.title }}</a>
+                                {% endfor %}
+                                </div>
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+{% endif %}

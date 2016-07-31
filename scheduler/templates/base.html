@@ -120,28 +120,12 @@
                     </div>
                 </div>
             </div>
-            {% elif swap_LoginPanel_to_accountmanager_menu == True %}
-            {% load menu %}
-            <div class=col-sm-4>
-                <div class="panel panel-default">
-                    <div class=panel-heading>
-                        <h4 class=panel-title>
-                            Opcje
-                        </h4>
-                    </div>
-                    <div class=panel-body>
-                       {% generate_menu %}
-								{% with menu=menus.main %}
-								<div class="list-group">
-								{% for item in menu %}
-    <a href="{{ item.url }}" class="list-group-item">{{ item.title }}</a>
- {% endfor %}
-</div>
-{% endwith %}
-                    </div>
-                </div>
-            </div>
             {% endif %}
+
+            {% block additionalMenus %}
+            {% endblock %}
+
+
         </div>
     </div>
 
