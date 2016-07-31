@@ -12,7 +12,10 @@ Wszystkie pliki projektu znajdują się w katalogu myEnv.
 pip install python-dateutil
 ```
 - django-picklefield-0.3.2 ( nie wymaga instalacji jest w katalogu projektu )
-
+- django-simple-menu
+```
+pip install django-simple-menu
+```
 ## Lista zadań do wykonania:
 - ogólna struktura bazy danych - OK
 - layout strony - OK
