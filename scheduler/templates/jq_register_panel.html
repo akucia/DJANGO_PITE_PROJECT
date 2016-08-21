@@ -1,0 +1,46 @@
+<div id="pageHeader">
+    <h1>Rejestracja</h1>
+    <p>
+        Wypełnij poniższe pola i zapoznaj się z regulaminem
+    </p>
+</div>
+
+<div id="pageContent">
+    <form action="#" id="jq_register_form" method="post" class="form-horizontal">
+        {% csrf_token %}
+
+        <p>
+
+        {% for ID,name,type in fields  %}
+
+        <div class="form-group" style="width:100%; margin:0px;">
+            <label class="control-label" for="{{ ID }}">{{ name }}</label>
+            <div style="position: relative;">
+                <input type="{{ type }}" id="{{ ID }}" class="form-control" required
+                       autofocus>
+
+                <span class="glyphicon form-control-feedback" ></span>
+
+            </div>
+
+            <span class="help-block"></span>
+        </div>
+
+        {% endfor %}
+
+        </p>
+
+        <div id="ErrorMSG">
+
+        </div>
+
+        <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Zarejestruj</button>
+    </form>
+
+    <script src="/static/jq_fieldMarkers.js" type="text/javascript"> </script>
+    <script src="/static/jq_register_panel_js.js" type="text/javascript"></script>
+
+
+
+
+</div>

@@ -1,0 +1,88 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="author" content="kuba" >
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <title>Scheduler</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-datetimepicker.css' %}">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/moment-with-locales.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap-datetimepicker.js' %}"></script>
+
+    <script src="{% static 'jq_pageController.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'my.css' %}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <nav class="avbar navbar-fixed-top navbar-inverse" role=navigation>
+        <div class="container-fluid" id="navBar">
+            <!-- tutaj ładowane są opcje menu zależnie od kontekstu
+            na podstawie pliku jq_navBar !-->
+        </div>
+    </nav>
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class=container-fluid>
+        <div class=row>
+            <div class=col-sm-12>
+                <div class=page-header id="pageHeader">
+                    <!-- Tytuł podstrony i najważniejsze informacje ładowany dynamicznie-->
+                    <!-- Eg.
+                        <h1>Ankieta</h1>
+                        <p>
+                            Utworzona przez
+                            <span class="glyphicon glyphicon-user"></span>
+                            Jan Kowalski dnia
+                            <span class="glyphicon glyphicon-time"></span>
+                            11.05.2016
+                       </p>
+                    -->
+                </div>
+            </div>
+        </div>
+
+        <div class=row>
+            <div class=col-sm-8 id="pageContent">
+                <!-- Zawartość podstrony -->
+                <!-- Eg.
+                    <p class=lead> Coś ważnego </p>
+                    <p> Inny tekst </p>
+                -->
+                {% block content %}
+                {% endblock %}
+            </div>
+
+
+            <div class=col-sm-4 id="loginPane">
+                <!-- panel logowania formowany w zależności od kontekstu -->
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<p>
+
+</p>
+</body>
+</html>
