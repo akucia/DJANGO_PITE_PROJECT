@@ -1,3 +1,9 @@
+        $(document).ready(
+            function(){
+                $("#termsAndConditions").load("hidden/jqTermsAndConditions #pageContent");
+            }
+        );
+
         function getCookie(name) {
             var cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -21,8 +27,9 @@
             var surnameValid=isSurnameValid();
             var emailValid=isEmailValid();
             var passwordValid=isPasswordValid();
+            var accepted=isAccepted();
 
-            if(nameValid && surnameValid && emailValid && passwordValid){
+            if(nameValid && surnameValid && emailValid && passwordValid && accepted){
 
                 console.log("form submitted!")  // sanity check;
 
@@ -61,8 +68,6 @@
                             console.log(key);
                             markFieldAsIncorrect(key,json["fieldState"][key]);
                         });
-
-
                     },
 
                     error : function(xhr,errmsg,err) {
@@ -137,4 +142,19 @@
                 markFieldAsUnknownState("inputEmail");
             }
             return isValid;
+        }
+
+        function isAccepted(){
+            var checked=$("#termsAndConditionsAccepted").is(":checked");
+            if(checked){
+                $("#termsAndConditionsAccepted").closest( ".form-group" ).removeClass("has-error");
+                $("#termsAndConditionsAccepted").closest( ".form-group" ).removeClass("has-feedback");
+                $("#termsAndConditionsAccepted").parent().children( ".help-block" ).html("");
+            }
+            else{
+                $("#termsAndConditionsAccepted").closest( ".form-group" ).addClass("has-error");
+                $("#termsAndConditionsAccepted").closest( ".form-group" ).addClass("has-feedback");
+                $("#termsAndConditionsAccepted").parent().children( ".help-block" ).html("Przeczytaj i zaakceptuj regulamin");
+            }
+            return checked;
         }

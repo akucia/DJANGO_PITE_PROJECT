@@ -20,7 +20,12 @@ def jqDefault(request):
     return render(request,'jq_main.html')
 
 def jqLoginPane(request):
-    return render(request,'jq_loginPane.html')
+    return render(request,'jq_loginPane.html',{
+        'fields': [
+            ("inputEmail","Email:","text"),
+            ("inputPassword","Hasło:","password")
+        ]
+    })
 
 def jqRegisterPanel(request):
     return render(request,'jq_register_panel.html',{'fields': [
@@ -30,3 +35,7 @@ def jqRegisterPanel(request):
         ('inputPassword','Hasło:','password'),
         ('inputPasswordRetype', 'Powtórz hasło:', 'password')
     ]})
+
+
+def jqTermsAndConditions(request):
+    return render(request,'jq_terms_and_conditions.html')

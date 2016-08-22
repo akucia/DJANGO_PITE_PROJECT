@@ -1,3 +1,25 @@
+        $(document).ready(
+            function(){
+                $("#termsAndConditions").load("hidden/jqTermsAndConditions #pageContent");
+            }
+        );
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
         $('#jq_register_form').on('submit', function(event){
             event.preventDefault();
 
@@ -12,7 +34,7 @@
 
 
                 $.ajax({
-                    url : "{% url 'jq_registerPanel_registerRequest' %}",
+                    url : "hidden/jqRegisterPanel/registerRequest",
                     type : "POST",
                     data : {
                         name : $('#inputName').val(),
@@ -20,7 +42,7 @@
                         email : $('#inputEmail').val(),
                         password : $('#inputPassword').val(),
                         rePassword: $('#inputPasswordRetype').val(),
-                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                        csrfmiddlewaretoken: getCookie('csrftoken')
                     },
 
                     success : function(json) {
@@ -30,6 +52,10 @@
 
                         var fieldMessages=Object.keys(json["fieldState"]);
 
+                        if(json["successfullRegistration"]==true){
+                            loadLoginPane();
+                            loadDefaultBody();
+                        }
 
                         markFieldAsCorrect("inputName");
                         markFieldAsCorrect("inputSurname");
@@ -41,6 +67,7 @@
                             console.log(key);
                             markFieldAsIncorrect(key,json["fieldState"][key]);
                         });
+
 
                     },
 

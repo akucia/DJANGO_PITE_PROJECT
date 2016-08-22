@@ -23,6 +23,20 @@ $( document ).ready(function() {
         hideLoginPane();
     });
 
+    $('#navBar').on('click','#logOutButton',function(){
+        $.ajax({
+            type: "GET",
+            url: "hidden/jqLoginElements/logoutRequest",
+
+
+            success : function(json){
+                loadLoginPane();
+                loadDefaultBody();
+            }
+        });
+
+    });
+
 });
 
 
@@ -33,6 +47,7 @@ function loadDefaultBody(){
     // load default body
     $("#pageHeader").load( "hidden/jqDefault #pageHeader");
     $("#pageContent").load("hidden/jqDefault #pageContent");
+    showLoginPane();
 }
 function loadLoginPane(){
     $("#pageContent").removeClass("col-sm-12");

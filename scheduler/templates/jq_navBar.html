@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if request.session.member_id %}
                 <li><a href="{% url 'am_userInfo' %}">Konto</a></li>
-                <li><a  id="logOutButton" href="{% url 'jq_loginElements_logoutRequest' %}">Wyloguj</a></li>
+                <li><a  id="logOutButton" href="#">Wyloguj</a></li>
                 {% else %}
                 <li><a  class="navMenuLink hideLoginPane" href="hidden/jqRegisterPanel">Zarejestruj</a></li>
                 {% endif %}

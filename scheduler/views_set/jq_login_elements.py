@@ -18,3 +18,5 @@ def logoutRequestAjax(request):
         content_type="application/json"
     )
 
+def loginRequestAjax(request):
+    pass

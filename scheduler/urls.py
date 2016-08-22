@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^hidden/jqLoginPane$',jqLoginPane,name="jq_loginPane"),
     url(r'^hidden/jqRegisterPanel$',jqRegisterPanel,name="jq_registerPanel"),
     url(r'^hidden/jqRegisterPanel/registerRequest$',registerAjaxRequest,name="jq_registerPanel_registerRequest"),
-    url(r'^hidden/jqLoginElements/logoutRequest$',logoutRequestAjax,name="jq_loginElements_logoutRequest")
+    url(r'^hidden/jqLoginElements/logoutRequest$',logoutRequestAjax,name="jq_loginElements_logoutRequest"),
+    url(r'^hidden/jqTermsAndConditions$',jqTermsAndConditions,name="jq_termsAndConditions")
 
 ]
