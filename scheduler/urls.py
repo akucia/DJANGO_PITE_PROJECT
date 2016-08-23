@@ -11,6 +11,9 @@ from .views_set.html_report import htmlReport
 from .views_set.website_stat_control import websiteStatManager
 from .views_set.contact_control import contactManager,sendMail
 from .views_set.terms_and_conditions import termsAndConditions
+from .views_set.jq_register_panel import registerAjaxRequest
+from .views_set.jq_login_elements import logoutRequestAjax, loginRequestAjax
+from .views_set.jq_global_statistic import jqGlobalStatistic
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [
@@ -44,5 +47,17 @@ urlpatterns = [
     url(r'^sendMail',sendMail,name="sendMail"),
 
     url(r'^termsAndConditions',termsAndConditions,name="termsAndConditions"),
+
+    # jqery page version
+    url(r'^jqStart$',jqMain, name="jq_main"),
+    url(r'^hidden/jqNavBar$',jqNavBar, name="jq_navBar"),
+    url(r'^hidden/jqDefault$',jqDefault,name="jq_default"),
+    url(r'^hidden/jqLoginPane$',jqLoginPane,name="jq_loginPane"),
+    url(r'^hidden/jqRegisterPanel$',jqRegisterPanel,name="jq_registerPanel"),
+    url(r'^hidden/jqRegisterPanel/registerRequest$',registerAjaxRequest,name="jq_registerPanel_registerRequest"),
+    url(r'^hidden/jqLoginElements/logoutRequest$',logoutRequestAjax,name="jq_loginElements_logoutRequest"),
+    url(r'^hidden/jqTermsAndConditions$',jqTermsAndConditions,name="jq_termsAndConditions"),
+    url(r'^hidden/jqGlobalStatistic$',jqGlobalStatistic, name="jq_globalStatistic"),
+    url(r'^hidden/jqLoginElements/loginRequest$', loginRequestAjax, name="jq_loginElements_loginRequest"),
 
 ]

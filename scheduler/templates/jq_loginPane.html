@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class=panel-heading>
+        <h4 class=panel-title>
+            {% if request.session.member_id %}
+            Zalogowany jako:
+            {% else %}
+            Panel logowania
+
+            {% endif %}
+        </h4>
+    </div>
+    <div class=panel-body>
+        {% if request.session.member_id %}
+        <p>
+            <span class="glyphicon glyphicon-user"></span>
+            {{ request.session.member_name }} {{ request.session.member_surname }}
+        </p>
+
+        {% else %}
+
+        <form id="jq_login_form" action="{% url 'jq_loginElements_loginRequest' %}" method="post" class="form-signin">
+            {% csrf_token %}
+
+                {% for ID,name,type in fields %}
+
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <label class="control-label" for="{{ ID }}">{{ name }}</label>
+                    <div style="position: relative;">
+                        <input type="{{ type }}" id="{{ ID }}" class="form-control" required
+                               autofocus>
+
+                        <span class="glyphicon form-control-feedback"></span>
+
+                    </div>
+
+                    <span class="help-block"></span>
+                </div>
+
+                {% endfor %}
+
+
+            <script src="/static/jq_cookieProvider.js" type="text/javascript"> </script>
+            <script src="/static/jq_fieldMarkers.js" type="text/javascript"> </script>
+            <script src="/static/jq_login.js" type="text/javascript"></script>
+
+
+            <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Zaloguj</button>
+
+        </form>
+
+
+        <p>Zapomniałeś hasła?
+            <a href="{% url 'changePassword' %}">Odzyskaj hasło</a>
+        </p>
+        <p>Nie masz konta?
+            <a class="navMenuLink hideLoginPane" href="hidden/jqRegisterPanel">Stwórz darmowe konto</a>
+        </p>
+
+        {% endif %}
+    </div>
+</div>

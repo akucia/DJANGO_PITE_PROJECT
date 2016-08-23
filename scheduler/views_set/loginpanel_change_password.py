@@ -37,7 +37,7 @@ def changePassword(request):
     			'PITE zmiana hasła',
     			'Prosiłeś o zmianę hasła. Wygenerowany kod to :'+code,
     			'admin@pite.pl',
-    			[email],
+    			email,
     			fail_silently=False,
 				)
 		except:
