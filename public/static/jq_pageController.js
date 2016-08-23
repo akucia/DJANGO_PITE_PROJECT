@@ -24,6 +24,7 @@ $( document ).ready(function() {
     });
 
     $('#navBar').on('click','#logOutButton',function(){
+
         $.ajax({
             type: "GET",
             url: "hidden/jqLoginElements/logoutRequest",
@@ -35,6 +36,7 @@ $( document ).ready(function() {
             }
         });
 
+        event.preventDefault();
     });
 
 });

@@ -22,8 +22,8 @@ def jqDefault(request):
 def jqLoginPane(request):
     return render(request,'jq_loginPane.html',{
         'fields': [
-            ("inputEmail","Email:","text"),
-            ("inputPassword","Hasło:","password")
+            ("inputLoginEmail","Email:","text"),
+            ("inputLoginPassword","Hasło:","password")
         ]
     })
 

@@ -118,3 +118,11 @@ th { padding: 10px; }
    border-width: 2px;
    overflow: auto;
 }
+
+.statisticTable tr td{
+    padding: 10px;
+}
+
+.chartInPage{
+    padding: 10px 0px;
+}

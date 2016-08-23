@@ -18,7 +18,7 @@
 
         {% else %}
 
-        <form action="{% url 'logIn' %}" method="post" class="form-signin">
+        <form id="jq_login_form" action="{% url 'jq_loginElements_loginRequest' %}" method="post" class="form-signin">
             {% csrf_token %}
 
                 {% for ID,name,type in fields %}
@@ -39,6 +39,11 @@
                 {% endfor %}
 
 
+            <script src="/static/jq_cookieProvider.js" type="text/javascript"> </script>
+            <script src="/static/jq_fieldMarkers.js" type="text/javascript"> </script>
+            <script src="/static/jq_login.js" type="text/javascript"></script>
+
+
             <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Zaloguj</button>
 
         </form>
@@ -48,7 +53,7 @@
             <a href="{% url 'changePassword' %}">Odzyskaj hasło</a>
         </p>
         <p>Nie masz konta?
-            <a href="{% url 'registerView' %}">Stwórz darmowe konto</a>
+            <a class="navMenuLink hideLoginPane" href="hidden/jqRegisterPanel">Stwórz darmowe konto</a>
         </p>
 
         {% endif %}

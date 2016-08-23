@@ -1,0 +1,124 @@
+<div id="pageHeader">
+    <h1>Statystki strony</h1>
+    <p>
+        <span class="glyphicon glyphicon-info-sign"></span>
+        Garść ważniejszych informacji na temat strony.
+    </p>
+</div>
+
+
+<div id="pageContent">
+
+    <h1>Użytkownicy: </h1>
+
+    <table class="table-striped statisticTable">
+        <tr>
+            <td><strong>Liczba użytkowników:</strong></td>
+            <td>
+                {{ numberOfUsers }}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Zarejestrowanych dzisiaj:</strong></td>
+            <td>
+                {{ numberOfUsersToday }}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Najnowszy użytkownik(Serdecznie Witamy!):</strong></td>
+            <td>
+                {{ mostRecentUser }}
+            </td>
+        </tr>
+    </table>
+
+    <div id="chart3" class="chartInPage"></div>
+
+    <hr/>
+
+
+    <h1>Ankiety: </h1>
+
+    <table class="table-striped statisticTable">
+        <tr>
+            <td><strong>Całkowita liczba Ankiet:</strong></td>
+            <td>
+                {{ numberOfSurveys}}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Liczba ankiet założonych dzisiaj:</strong></td>
+            <td>
+                {{ numberOfSurveysToday}}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Najnowsza Ankieta:</strong></td>
+            <td>
+                {{ mostRecentSurvey}}
+            </td>
+        </tr>
+    </table>
+
+    <div id="chart1" class="chartInPage" ></div>
+
+    <hr>
+
+
+    <h1>Odpowiedzi: </h1>
+
+    <table class="table-striped statisticTable">
+        <tr>
+            <td><strong>Liczba wszystkich Odpowiedzi:</strong></td>
+            <td>
+                {{ numberOfAnswers}}
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Liczba odpowiedzi udzielonych dzisiaj:</strong></td>
+            <td>
+                {{ numberOfAnswersToday}}
+            </td>
+        </tr>
+    </table>
+
+
+    <div id="chart2" class="chartInPage" ></div>
+
+    <script src="/static/jq_drawChart.js" type="text/javascript"> </script>
+    <script>
+        function drawAll(){
+                $(".chartInPage").height($("#pageContent").width()*3/6);
+                drawStepperAreaChart(
+                    "Ilość rejestracji uzytkownikow w ciagu ostatnich 10 dni",
+                    "Ilość",
+                    {{ userPlot|safe }},
+                    "chart3"
+                );
+                drawStepperAreaChart(
+                    "Ilość utworzonych ankiet w ciągu ostatnich 10 dni",
+                    "Ilość",
+                    {{ surveyPlot|safe }},
+                    "chart1"
+                );
+                drawStepperAreaChart(
+                    "Ilość udzielonych odpowiedzi w ciągu ostatnich 10 dni",
+                    "Ilość",
+                    {{ answerPlot|safe }},
+                    "chart2"
+                );
+        }
+        $(document).ready(
+            function(){
+                drawAll();
+            }
+        );
+
+        $( window ).resize(
+            function(){
+                drawAll();
+            }
+        );
+    </script>
+
+</div>

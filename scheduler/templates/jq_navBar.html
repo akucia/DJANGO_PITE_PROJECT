@@ -1,20 +1,20 @@
 <div class="navbar-header">
-                <a  class="navbar-brand navMenuLink showLoginPane" href="{% url 'jq_default' %}">System planowania</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'surveyManager' %}" >Nowa ankieta</a></li>
-                <li><a href="{% url 'surveyAnswer' %}">Wypełnij ankietę</a> </li>
-                <li><a href="{% url 'websiteStatManager' %}">Statystyki</a></li>
-                <li><a href="{% url 'contactManager'  %}">Kontakt</a></li>
-                <li><a href="{% url 'termsAndConditions'  %}">Regulamin</a></li>
+    <a class="navbar-brand navMenuLink showLoginPane" href="{% url 'jq_default' %}">System planowania</a>
+</div>
+<ul class="nav navbar-nav">
+    <li><a href="{% url 'surveyManager' %}">Nowa ankieta</a></li>
+    <li><a href="{% url 'surveyAnswer' %}">Wypełnij ankietę</a></li>
+    <li><a class="navMenuLink showLoginPane" href="{% url 'jq_globalStatistic' %}">Statystyki</a></li>
+    <li><a href="{% url 'contactManager'  %}">Kontakt</a></li>
+    <li><a class="navMenuLink showLoginPane" href="{% url 'jq_termsAndConditions'  %}">Regulamin</a></li>
 
-            </ul>
+</ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                {% if request.session.member_id %}
-                <li><a href="{% url 'am_userInfo' %}">Konto</a></li>
-                <li><a  id="logOutButton" href="#">Wyloguj</a></li>
-                {% else %}
-                <li><a  class="navMenuLink hideLoginPane" href="hidden/jqRegisterPanel">Zarejestruj</a></li>
-                {% endif %}
-            </ul>
+<ul class="nav navbar-nav navbar-right">
+    {% if request.session.member_id %}
+    <li><a href="{% url 'am_userInfo' %}">Konto</a></li>
+    <li><a id="logOutButton" href="#">Wyloguj</a></li>
+    {% else %}
+    <li><a class="navMenuLink hideLoginPane" href="hidden/jqRegisterPanel">Zarejestruj</a></li>
+    {% endif %}
+</ul>

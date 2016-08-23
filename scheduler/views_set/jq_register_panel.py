@@ -86,6 +86,6 @@ def registerAjaxRequest(request):
 
     else:
         return HttpResponse(
-            json.dumps({"errorMSGe": "Błąd metody przekazywania danych"}),
+            json.dumps({"errorMSG": "Błąd metody przekazywania danych"}),
             content_type="application/json"
         )
