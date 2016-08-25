@@ -30,6 +30,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST =  'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = '668535786'
+EMAIL_HOST_USER = 'jsstach@gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
