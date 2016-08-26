@@ -42,3 +42,17 @@ function markFieldAsCorrect(ID){
 
             $("#"+ID).parent().parent().children( ".help-block" ).html("");
         }
+
+function markFieldAsCorrect(ID,message){
+    $("#"+ID).closest( ".form-group" ).removeClass("has-error");
+    $("#"+ID).closest( ".form-group" ).removeClass("has-warning");
+    $("#"+ID).closest( ".form-group" ).addClass("has-success");;
+
+    $("#"+ID).closest( ".form-group" ).addClass("has-feedback");
+
+    $("#"+ID).parent().children(".glyphicon").removeClass("glyphicon-remove");
+    $("#"+ID).parent().children(".glyphicon").removeClass( "glyphicon-warning-sign" );
+    $("#"+ID).parent().children( ".glyphicon" ).addClass( "glyphicon-ok" );
+
+    $("#"+ID).parent().parent().children( ".help-block" ).html(message);
+}

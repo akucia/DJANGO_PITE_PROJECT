@@ -14,6 +14,8 @@ from .views_set.terms_and_conditions import termsAndConditions
 from .views_set.jq_register_panel import registerAjaxRequest
 from .views_set.jq_login_elements import logoutRequestAjax, loginRequestAjax
 from .views_set.jq_global_statistic import jqGlobalStatistic
+from .views_set.jq_contact import jqContactForm, jqContactSentMailRequest
+from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [
@@ -59,5 +61,10 @@ urlpatterns = [
     url(r'^hidden/jqTermsAndConditions$',jqTermsAndConditions,name="jq_termsAndConditions"),
     url(r'^hidden/jqGlobalStatistic$',jqGlobalStatistic, name="jq_globalStatistic"),
     url(r'^hidden/jqLoginElements/loginRequest$', loginRequestAjax, name="jq_loginElements_loginRequest"),
+    url(r'^hidden/jqContactForm$',jqContactForm,name="jq_contactForm"),
+    url(r'^hidden/jqContactForm/contactSentMailRequest$', jqContactSentMailRequest, name="jq_contact_sentMailRequest"),
+    url(r'^hidden/jqRestorePassword$',jqRestorePassword,name="jq_restorePassword"),
+    url(r'^hidden/jqRestorePassword/sentRestoreEmailRequest$',jqSentRestoreEmailRequest, name="jq_restorePassword_sentRestoreEmailRequest")
+
 
 ]
