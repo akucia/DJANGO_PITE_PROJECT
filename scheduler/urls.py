@@ -15,7 +15,8 @@ from .views_set.jq_register_panel import registerAjaxRequest
 from .views_set.jq_login_elements import logoutRequestAjax, loginRequestAjax
 from .views_set.jq_global_statistic import jqGlobalStatistic
 from .views_set.jq_contact import jqContactForm, jqContactSentMailRequest
-from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest
+from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest, jqSentNewPasswordRequest
+from .views_set.jq_account_management import jqAccountManagement
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [
@@ -64,7 +65,8 @@ urlpatterns = [
     url(r'^hidden/jqContactForm$',jqContactForm,name="jq_contactForm"),
     url(r'^hidden/jqContactForm/contactSentMailRequest$', jqContactSentMailRequest, name="jq_contact_sentMailRequest"),
     url(r'^hidden/jqRestorePassword$',jqRestorePassword,name="jq_restorePassword"),
-    url(r'^hidden/jqRestorePassword/sentRestoreEmailRequest$',jqSentRestoreEmailRequest, name="jq_restorePassword_sentRestoreEmailRequest")
-
+    url(r'^hidden/jqRestorePassword/sentRestoreEmailRequest$',jqSentRestoreEmailRequest, name="jq_restorePassword_sentRestoreEmailRequest"),
+    url(r'^hidden/jqRestorePassword/sentNewPasswordRequest$',jqSentNewPasswordRequest,name="jq_restorePassword_sentNewPasswordRequest"),
+    url(r'^hidden/jqAccountManagement$',jqAccountManagement,name="jq_accountManagement")
 
 ]

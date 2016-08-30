@@ -31,9 +31,7 @@
                     },
 
                     success : function(json) {
-
                         console.log(json);
-                        console.log(json["errorMSG"]);
 
                         var fieldMessages=Object.keys(json["fieldState"]);
 
@@ -49,7 +47,6 @@
                         markFieldAsCorrect("inputPasswordRetype");
 
                         fieldMessages.forEach(function(key){
-                            console.log(key);
                             markFieldAsIncorrect(key,json["fieldState"][key]);
                         });
                     },

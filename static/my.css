@@ -126,3 +126,11 @@ th { padding: 10px; }
 .chartInPage{
     padding: 10px 0px;
 }
+
+.insideNavLinkHide{
+   background-color:#cecece;
+}
+
+.insideNavLinkShow{
+    background-color:#fff;
+}

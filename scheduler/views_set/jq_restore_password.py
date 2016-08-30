@@ -11,6 +11,7 @@ import json
 from django.core.mail import send_mail
 from django import forms
 from captcha.fields import CaptchaField
+from django.contrib.auth.hashers import make_password
 
 from django.http import HttpResponse
 
@@ -78,3 +79,54 @@ def jqSentRestoreEmailRequest(request):
                 json.dumps({"errorMSG": "Błąd metody przekazywania danych"}),
                 content_type="application/json"
             )
+
+def jqSentNewPasswordRequest(request) :
+    if request.method == 'POST':
+        fields=dict()
+        allOk=True
+
+        if request.POST['secretCode']!=request.session['restore_code']:
+            fields["secretCode"]="Błędny kod weryfikujący"
+            allOk=False
+
+        if request.POST['restorePassword']!=request.POST['restorePasswordRetype']:
+            fields["restorePassword"] = "Hasła nie są zgodne"
+            fields["restorePasswordRetype"]=""
+            allOk = False
+
+        if not re.match(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}", request.POST["restorePassword"]):
+            allOk = False
+            fields['restorePassword'] = "Hasło musi zawierać litery o różnej wielkości oraz cyfry i mieć długość co najmniej 6 znaków"
+            fields["restorePasswordRetype"] = ""
+        if allOk:
+            user=SurveyUser.objects.get(email=request.session['restore_email'])
+            user.hash_of_password=make_password(request.POST['restorePassword'],salt=None,hasher='unsalted_md5')
+            user.save()
+
+            del request.session['restore_email']
+            del request.session['restore_code']
+
+            return HttpResponse(
+                json.dumps({
+                    "success": True
+                }),
+                content_type="application/json"
+            )
+
+        else:
+            return HttpResponse(
+                json.dumps({
+                    "success": False,
+                    "errorMSG": "Błąd wprowadzonych danych",
+                    "fields": fields
+                }),
+                content_type="application/json"
+            )
+        pass
+    else:
+        return HttpResponse(
+            json.dumps({
+                "success": False,
+                "errorMSG": "Błąd metody przekazywania danych"}),
+            content_type="application/json"
+        )

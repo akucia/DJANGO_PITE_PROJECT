@@ -1,7 +1,5 @@
 
-
-
-function markFieldAsCorrect(ID){
+        function markFieldAsCorrect(ID){
             $("#"+ID).closest( ".form-group" ).removeClass("has-error");
             $("#"+ID).closest( ".form-group" ).removeClass("has-warning");
             $("#"+ID).closest( ".form-group" ).addClass("has-success");
@@ -12,7 +10,8 @@ function markFieldAsCorrect(ID){
             $("#"+ID).parent().children(".glyphicon").removeClass( "glyphicon-warning-sign" );
             $("#"+ID).parent().children( ".glyphicon" ).addClass( "glyphicon-ok" );
 
-            $("#"+ID).parent().parent().children( ".help-block" ).html("");
+            var message="";
+            $("#"+ID).parent().parent().children( ".help-block" ).html(message);
         }
 
         function markFieldAsIncorrect(ID,message){
@@ -40,19 +39,22 @@ function markFieldAsCorrect(ID){
             $("#"+ID).parent().children(".glyphicon").removeClass( "glyphicon-warning-sign" );
             $("#"+ID).parent().children( ".glyphicon" ).removeClass( "glyphicon-ok" );
 
-            $("#"+ID).parent().parent().children( ".help-block" ).html("");
+            var message="";
+            $("#"+ID).parent().parent().children( ".help-block" ).html(message);
         }
 
-function markFieldAsCorrect(ID,message){
-    $("#"+ID).closest( ".form-group" ).removeClass("has-error");
-    $("#"+ID).closest( ".form-group" ).removeClass("has-warning");
-    $("#"+ID).closest( ".form-group" ).addClass("has-success");;
+        function markFieldAsCorrectWithText(ID,message){
 
-    $("#"+ID).closest( ".form-group" ).addClass("has-feedback");
+            $("#"+ID).closest( ".form-group" ).removeClass("has-error");
+            $("#"+ID).closest( ".form-group" ).removeClass("has-warning");
+            $("#"+ID).closest( ".form-group" ).addClass("has-success");
 
-    $("#"+ID).parent().children(".glyphicon").removeClass("glyphicon-remove");
-    $("#"+ID).parent().children(".glyphicon").removeClass( "glyphicon-warning-sign" );
-    $("#"+ID).parent().children( ".glyphicon" ).addClass( "glyphicon-ok" );
+            $("#"+ID).closest( ".form-group" ).addClass("has-feedback");
 
-    $("#"+ID).parent().parent().children( ".help-block" ).html(message);
-}
+            $("#"+ID).parent().children(".glyphicon").removeClass("glyphicon-remove");
+            $("#"+ID).parent().children(".glyphicon").removeClass( "glyphicon-warning-sign" );
+            $("#"+ID).parent().children( ".glyphicon" ).addClass( "glyphicon-ok" );
+
+            $("#"+ID).parent().parent().children( ".help-block" ).html(message);
+        }
+
