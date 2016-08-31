@@ -16,7 +16,8 @@ from .views_set.jq_login_elements import logoutRequestAjax, loginRequestAjax
 from .views_set.jq_global_statistic import jqGlobalStatistic
 from .views_set.jq_contact import jqContactForm, jqContactSentMailRequest
 from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest, jqSentNewPasswordRequest
-from .views_set.jq_account_management import jqAccountManagement
+from .views_set.jq_account_management import jqAccountManagement, jqAccountChangeUserdataRequest, jqAccountChangeUserPasswordRequest, jqAccountRemoveSurveyRequest
+from .views_set.jq_surveyAnswer import jq_surveyAnswer
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [
@@ -67,6 +68,10 @@ urlpatterns = [
     url(r'^hidden/jqRestorePassword$',jqRestorePassword,name="jq_restorePassword"),
     url(r'^hidden/jqRestorePassword/sentRestoreEmailRequest$',jqSentRestoreEmailRequest, name="jq_restorePassword_sentRestoreEmailRequest"),
     url(r'^hidden/jqRestorePassword/sentNewPasswordRequest$',jqSentNewPasswordRequest,name="jq_restorePassword_sentNewPasswordRequest"),
-    url(r'^hidden/jqAccountManagement$',jqAccountManagement,name="jq_accountManagement")
+    url(r'^hidden/jqAccountManagement$',jqAccountManagement,name="jq_accountManagement"),
+    url(r'^hidden/jqAccountManagement/sentChangeUserdataRequest$',jqAccountChangeUserdataRequest, name="jq_accountManagement_changeUserData"),
+    url(r'^hidden/jqAccountManagement/sentChangeUserPasswordRequest$', jqAccountChangeUserPasswordRequest,name="jq_accountManagement_changeUserPassword"),
+    url(r'^hidden/jqAccountManagement/sentRemoveSurveyRequest$', jqAccountRemoveSurveyRequest,name="jq_accountManagement_removeSurvey"),
+    url(r'^hidden/jqSurveyAnswer$',jq_surveyAnswer,name="jq_surveyAnswer")
 
 ]

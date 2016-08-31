@@ -61,41 +61,72 @@
             </table>
         </div>
 
-        <div id="accountDataChange" class="partialView" style="display: none;">
+        <div id="accountDataChange" class="partialView" style="display: none;" >
             <h1>Zmiana danych osobowych</h1>
-            <form action="{% url 'am_changeUserdata' %}" method="post">
+            <form action="#" id="jq_accoutDataChangeForm" method="post" class="form-signin">
                 {% csrf_token %}
-                <label>Imię :</label>
-                <input name="member_name" type="text" id="member_name" class="form-control"
-                       value={{ request.session.member_name }} required
-                       autofocus>
-                <label>Nazwisko :</label>
-                <input name="member_surname" type="text" id="member_surname" class="form-control"
-                       value={{ request.session.member_surname }} required
-                       autofocus>
+
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <label class="control-label" for="changeNameInput">Imię:</label>
+                    <div style="position: relative;">
+                        <input type="text" id="changeNameInput" class="form-control" value="{{ request.session.member_name }}" required>
+                        <span class="glyphicon form-control-feedback"></span>
+                    </div>
+
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <label class="control-label" for="changeSurnameInput">Nazwisko</label>
+                    <div style="position: relative;">
+                        <input type="text" id="changeSurnameInput" class="form-control"  value="{{ request.session.member_surname }}" required>
+                        <span class="glyphicon form-control-feedback"></span>
+
+                    </div>
+
+                    <span class="help-block"></span>
+                </div>
 
                 <input type="submit" name="respond" value="Zmień" class="btn btn-default navbar-bt"/>
             </form>
         </div>
 
-        <div id="accountChangePassword" class="partialView" style="display: none;">
+        <div id="accountChangePassword"  class="partialView" style="display: none;">
             <h1>Zmiana hasła</h1>
-            <form action="{% url 'am_changeUserpassword' %}" method="post">
+            <form action="" method="post" id="jq_accoutPasswordChangeForm">
                 {% csrf_token %}
 
-                <label>Stare Hasło:</label>
-                <input type="password" name="oldpass" id="oldpass" class="form-control" placeholder="old password"
-                       required>
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <div style="position: relative;">
+                    <label class="control-label" for="changeOldPasswordInput">Stare Hasło:</label>
+                        <input type="password" id="changeOldPasswordInput" class="form-control"  required>
+                        <span class="glyphicon form-control-feedback"></span>
+                    </div>
 
-                <label>Nowe Hasło:</label>
-                <input type="password" name="pass" id="pass" class="form-control" placeholder="new password" required>
+                    <span class="help-block"></span>
+                </div>
 
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <label class="control-label" for="changeNewPasswordInput">Nowe Hasło:</label>
+                    <div style="position: relative;">
+                        <input type="password" id="changeNewPasswordInput" class="form-control" required>
+                        <span class="glyphicon form-control-feedback"></span>
+                    </div>
 
-                <label>Powtórz nowe Hasło:</label>
-                <input type="password" name="rpass" id="rpass" class="form-control" placeholder="repeat new password"
-                       required>
-                <input type="submit" name="respond" value="zmień" class="btn btn-default navbar-bt"
-                       onClick="return validate()"/>
+                    <span class="help-block"></span>
+                </div>
+
+                <div class="form-group" style="width:100%; margin:0px;">
+                    <label class="control-label" for="changeNewPasswordRetypeInput">Powtórz nowe Hasło:</label>
+                    <div style="position: relative;">
+                        <input type="password" id="changeNewPasswordRetypeInput" class="form-control" required>
+                        <span class="glyphicon form-control-feedback"></span>
+                    </div>
+
+                    <span class="help-block"></span>
+                </div>
+
+                <input type="submit" name="respond" value="zmień" class="btn btn-default navbar-bt"/>
             </form>
         </div>
 
@@ -132,8 +163,8 @@
                     </td>
 
                     <td>
-                        <a href="./removeElement?adminID={{ adminID }}"><span
-                                class="glyphicon glyphicon-remove-circle"></span></a>
+                        <a href="{{ adminID }}" class="removeSurvey">
+                            <span class="glyphicon glyphicon-remove-circle "></span></a>
                     </td>
                 </tr>
 
@@ -179,6 +210,8 @@
 
     </div>
 
+    <script src="/static/jq_cookieProvider.js" type="text/javascript"> </script>
+    <script src="/static/jq_fieldMarkers.js" type="text/javascript"> </script>
     <script src="/static/jq_accountManagement.js" type="text/javascript"></script>
     <script src="/static/jq_drawChart.js" type="text/javascript"></script>
     <script>
