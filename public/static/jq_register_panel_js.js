@@ -15,9 +15,6 @@
 
             if(nameValid && surnameValid && emailValid && passwordValid && accepted){
 
-                console.log("form submitted!")  // sanity check;
-
-
                 $.ajax({
                     url : "hidden/jqRegisterPanel/registerRequest",
                     type : "POST",

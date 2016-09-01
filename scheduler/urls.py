@@ -17,7 +17,7 @@ from .views_set.jq_global_statistic import jqGlobalStatistic
 from .views_set.jq_contact import jqContactForm, jqContactSentMailRequest
 from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest, jqSentNewPasswordRequest
 from .views_set.jq_account_management import jqAccountManagement, jqAccountChangeUserdataRequest, jqAccountChangeUserPasswordRequest, jqAccountRemoveSurveyRequest
-from .views_set.jq_surveyAnswer import jq_surveyAnswer
+from .views_set.jq_surveyAnswer import jq_surveyAnswer, jqSurveyAnswerCheckUserIdRequest, jq_SurveyAnswerForm, jq_SurveyAnswerRedirector
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [
@@ -72,6 +72,9 @@ urlpatterns = [
     url(r'^hidden/jqAccountManagement/sentChangeUserdataRequest$',jqAccountChangeUserdataRequest, name="jq_accountManagement_changeUserData"),
     url(r'^hidden/jqAccountManagement/sentChangeUserPasswordRequest$', jqAccountChangeUserPasswordRequest,name="jq_accountManagement_changeUserPassword"),
     url(r'^hidden/jqAccountManagement/sentRemoveSurveyRequest$', jqAccountRemoveSurveyRequest,name="jq_accountManagement_removeSurvey"),
-    url(r'^hidden/jqSurveyAnswer$',jq_surveyAnswer,name="jq_surveyAnswer")
+    url(r'^hidden/jqSurveyAnswer$',jq_surveyAnswer,name="jq_surveyAnswer"),
+    url(r'^hidden/jqSurveyAnswer/checkIfUserIdIsCorrect$',jqSurveyAnswerCheckUserIdRequest,name="jq_surveyAnswer_checkUserId"),
+    url(r'^jqSurveyAnswerForm',jq_SurveyAnswerRedirector,name="surveyAnswerFormRedirector"),
+    url(r'^hidden/jqSurveyAnswerForm',jq_SurveyAnswerForm, name="surveyAnswerForm")
 
 ]

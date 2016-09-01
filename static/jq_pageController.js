@@ -1,8 +1,6 @@
 
 // init default document structure
 $( document ).ready(function() {
-    loadDefaultBody();
-    loadLoginPane();
 
     $(document).on('click', '.navMenuLink',function(event){
         var target=$(this).attr('href');
