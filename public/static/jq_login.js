@@ -7,30 +7,31 @@ $('#jq_login_form').on('submit', function(event){
                     url : "hidden/jqLoginElements/loginRequest",
                     type : "POST",
                     data : {
-                        email : $('#inputEmail').val(),
-                        password : $('#inputPassword').val(),
+                        email : $('#inputLoginEmail').val(),
+                        password : $('#inputLoginPassword').val(),
                         csrfmiddlewaretoken: getCookie('csrftoken')
                     },
 
                     success : function(json) {
-
                         console.log(json);
-                        console.log(json["errorMSG"]);
 
                         var fieldMessages=Object.keys(json["fieldState"]);
 
-                        if(json["successfullRegistration"]==true){
+                        if(json["successfullLogin"]==true){
                             loadLoginPane();
                             loadDefaultBody();
                         }
 
-                        markFieldAsCorrect("inputEmail");
-                        markFieldAsCorrect("inputPassword");
+                        else{
+                            markFieldAsCorrect("inputLoginEmail");
+                            markFieldAsIncorrect("inputLoginPassword","");
 
-                        fieldMessages.forEach(function(key){
-                            console.log(key);
-                            markFieldAsIncorrect(key,json["fieldState"][key]);
-                        });
+                            fieldMessages.forEach(function(key){
+                                console.log(key);
+                                markFieldAsIncorrect(key,json["fieldState"][key]);
+                            });
+
+                        }
                     },
 
                     error : function(xhr,errmsg,err) {

@@ -1,0 +1,31 @@
+<div id="pageHeader">
+    <h1>Podaj ID ankiety na którą chcesz odpowiedzieć</h1>
+    <p>
+        <span class="glyphicon glyphicon-info-sign"></span>
+        ID to numer pozwalający na identyfikację zapytania. Powinieneś go otrzymać od osoby przeprowadzającej ankietę. Dzięki niemu możliwe jest udzielanie odpowiedzi na ankiety bez konieczności rejestracji.
+    </p>
+</div>
+
+<div id="pageContent">
+
+        <form action="#" method="post" id="jq_surveyAnswer_check" class="form-signin">
+            {% csrf_token %}
+            <div class="form-group" style="width:100%; margin:0px;">
+                <label class="control-label" for="surveyAnswerUserId">ID:</label>
+                <div style="position: relative;">
+                    <input type="text"  id="surveyAnswerUserId" name="userID" class="form-control" required>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+
+                <span class="help-block"></span>
+            </div>
+
+            <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">Otwórz</button>
+
+        </form>
+
+        <script src="/static/jq_validators.js" type="text/javascript"> </script>
+        <script src="/static/jq_cookieProvider.js" type="text/javascript"> </script>
+        <script src="/static/jq_fieldMarkers.js" type="text/javascript"> </script>
+        <script src="/static/jq_surveyAnswer.js" type="text/javascript"></script>
+</div>

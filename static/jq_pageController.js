@@ -1,8 +1,6 @@
 
 // init default document structure
 $( document ).ready(function() {
-    loadDefaultBody();
-    loadLoginPane();
 
     $(document).on('click', '.navMenuLink',function(event){
         var target=$(this).attr('href');
@@ -22,6 +20,27 @@ $( document ).ready(function() {
     $(document).on('click','.hideLoginPane',function(){
         hideLoginPane();
     });
+
+    $(document).on('click', '.insideNavLinkHide',function(event){
+        event.preventDefault();
+        $(this).removeClass("insideNavLinkHide");
+        $(this).addClass("insideNavLinkShow");
+
+        var target=$(this).attr('href');
+
+        $("#"+target).hide();
+    });
+
+    $(document).on('click', '.insideNavLinkShow',function(event){
+        event.preventDefault();
+        $(this).addClass("insideNavLinkHide");
+        $(this).removeClass("insideNavLinkShow");
+
+        var target=$(this).attr('href');
+
+        $("#"+target).show();
+    });
+
 
     $(document).on('click','#logOutButton',function(){
 

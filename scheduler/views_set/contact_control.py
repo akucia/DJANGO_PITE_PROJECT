@@ -38,16 +38,16 @@ def sendMail(request):
         topic = request.POST['topic']
         text_message = request.POST['text']
         text_message = text_message + '\n' + 'This message was send by ' + name + ' ' + surname
-        try:
-            send_mail(
-                topic,
-                text_message,
-                email,
-                ['to@example.com'],
-                fail_silently=False,
-            )
-        except:
-            pass
+
+        print("DASDSADASD")
+        send_mail(
+            topic,
+            text_message,
+            "jsstach@gmail.com",
+            ['ksstach@gmail.com'],
+            fail_silently=False,
+        )
+
         form = CaptchaTestForm()
         if 'member_id' in request.session:
             row = SurveyUser.objects.get(id=request.session['member_id'])
