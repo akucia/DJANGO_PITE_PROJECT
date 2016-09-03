@@ -15,9 +15,6 @@
 
             if(nameValid && surnameValid && emailValid && passwordValid && accepted){
 
-                console.log("form submitted!")  // sanity check;
-
-
                 $.ajax({
                     url : "hidden/jqRegisterPanel/registerRequest",
                     type : "POST",
@@ -31,9 +28,7 @@
                     },
 
                     success : function(json) {
-
                         console.log(json);
-                        console.log(json["errorMSG"]);
 
                         var fieldMessages=Object.keys(json["fieldState"]);
 
@@ -49,7 +44,6 @@
                         markFieldAsCorrect("inputPasswordRetype");
 
                         fieldMessages.forEach(function(key){
-                            console.log(key);
                             markFieldAsIncorrect(key,json["fieldState"][key]);
                         });
                     },
@@ -66,8 +60,7 @@
 
         function isNameValid(){
             var toValidate=$("#inputName").val();
-            var regExp=/^[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ]{3,20}$/;
-            var isValid=regExp.test(toValidate);
+            var isValid=isName(toValidate);
 
             if(isValid==false){
                 markFieldAsIncorrect("inputName","Imię musi składać się z 3-20 liter");
@@ -81,8 +74,7 @@
 
         function isSurnameValid(){
             var toValidate=$("#inputSurname").val();
-            var regExp=/^[A-Za-z àáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð,.'-]{3,50}$/;
-            var isValid=regExp.test(toValidate);
+            var isValid=isSurname(toValidate);
 
             if(isValid==false){
                 markFieldAsIncorrect("inputSurname","Nazwisko musi składać się z 3-50 liter i znaków");
@@ -95,8 +87,7 @@
 
         function isPasswordValid(){
             var toValidate=$("#inputPassword").val();
-            var regExp=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-            var isValid=regExp.test(toValidate);
+            var isValid=isSecurePassword(toValidate);
 
             if(isValid==false){
                 markFieldAsIncorrect("inputPassword","Hasło musi zawierać litery o różnej wielkości oraz cyfry i mieś długość co najmniej 6 znaków");
@@ -116,8 +107,7 @@
 
         function isEmailValid(){
             var toValidate=$("#inputEmail").val();
-            var regExp=/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-            var isValid=regExp.test(toValidate);
+            var isValid=isEmail(toValidate);
 
             if(isValid==false){
                 markFieldAsIncorrect("inputEmail","Wpisz e-mail w poprawnym formacie");

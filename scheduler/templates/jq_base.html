@@ -22,6 +22,24 @@
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
     </script>
+
+    <script>
+        $(document).ready(function(){
+            {% if loadPage %}
+
+            $( "#navBar" ).load( "hidden/jqNavBar");
+            var target= "{{ loadPage }}";
+            $.get(target,function(data) {
+                $("#pageHeader").html($(data).filter('#pageHeader'));
+                $("#pageContent").html($(data).filter('#pageContent'));
+            });
+
+            {% else %}
+                loadDefaultBody();
+            {% endif %}
+                loadLoginPane();
+        });
+    </script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/moment-with-locales.js' %}"></script>
@@ -47,7 +65,7 @@
     <!-- Main component for a primary marketing message or call to action -->
     <div class=container-fluid>
         <div class=row>
-            <div class=col-sm-12>
+            <div class=col-sm-12 id="pageHeader">
                 <div class=page-header id="pageHeader">
                     <!-- Tytuł podstrony i najważniejsze informacje ładowany dynamicznie-->
                     <!-- Eg.
@@ -71,8 +89,7 @@
                     <p class=lead> Coś ważnego </p>
                     <p> Inny tekst </p>
                 -->
-                {% block content %}
-                {% endblock %}
+
             </div>
 
 

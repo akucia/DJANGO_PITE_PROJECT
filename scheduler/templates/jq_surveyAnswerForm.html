@@ -1,0 +1,116 @@
+<div id="pageHeader">
+    <h1>{{ title }}</h1>
+    <p>
+        Ankieta utworzona dnia:
+        <span class="glyphicon glyphicon-time"></span>
+        {{ creationDate }}
+    </p>
+</div>
+
+<div id="pageContent">
+    <p>
+        <strong>Opis:</strong>
+        {{ description }}
+    </p>
+
+    <h1>
+        Wypełnij formularz:
+    </h1>
+
+    <div id="answerContext">
+        {% if answerID %}
+        <strong>ID odpowiedzi</strong>
+        (umożliwia edycję odpowiedzi w przyszłości):
+        <strong>{{ answerID }}</strong>
+
+        <input class="js-copytextarea" readonly="readonly" value="{{ editURL }}"> </input>
+        <button class="js-textareacopybtn"><span class="glyphicon glyphicon-duplicate"></span></button>
+
+        <script type="text/javascript">
+            var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+
+            copyTextareaBtn.addEventListener('click', function(event) {
+                toCopy = document.querySelector('.js-copytextarea');
+                toCopy.select();
+
+                try {
+                    document.execCommand('copy');
+                 } catch (err) {
+                    alert("Kopiowanie do schowka nie powiodło się.");
+                 }
+            });
+
+        </script>
+        {% endif %}
+
+
+        <form action="#" method="post" id="jq_surveyAnswer_form" class="form-horizontal">
+            <input type="hidden" id="userID" value="{{ userID }}">
+
+            {% if answerID %}
+            <input type="hidden" id="answerID" value="{{ answerID }}">
+            {% endif %}
+
+
+            <div class="form-group" style="width:100%; margin:0px;">
+                <label class="control-label" for="surveyAnswerName">Imię:</label>
+                <div style="position: relative;">
+                    <input type="text" value="{{ name }}" id="surveyAnswerName" name="name" class="form-control" required>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+
+                <span class="help-block"></span>
+            </div>
+
+            <div class="form-group" style="width:100%; margin:0px;">
+                <label class="control-label" for="surveyAnswerSurname">Nazwisko:</label>
+                <div style="position: relative;">
+                    <input type="text" name="surname" value="{{ surname }}" id="surveyAnswerSurname" class="form-control" required>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+
+                <span class="help-block"></span>
+            </div>
+
+            <div class="form-group" style="width:100%; margin:0px;">
+                <label class="control-label" for="surveyAnswerEmail">Email:</label>
+                <div style="position: relative;">
+                    <input type="email" name="email" value="{{ email }}" id="surveyAnswerEmail" class="form-control" required>
+                    <span class="glyphicon form-control-feedback"></span>
+                </div>
+
+                <span class="help-block"></span>
+            </div>
+
+            <table class="table-striped">
+                <thead>
+                <tr>
+                    <th>Od:</th>
+                    <th>Do:</th>
+                    <th>Dostępność</th>
+                </tr>
+                </thead>
+
+                {% for fromDate,toDate,active in dateTimes %}
+                <tr>
+                    <td style="padding:10px">{{ fromDate }}</td>
+                    <td style="padding:10px">{{ toDate }}</td>
+                    <td style="padding:10px">
+                        <input type="checkbox" name="{{ fromDate }}|{{ toDate }}"
+                               {% if active %}
+                               checked="checked"
+                               {% endif %}>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+
+            <button class="btn btn-default navbar-bt" type="submit" style="width: 100%;">
+                Zapisz odpowiedź.
+            </button>
+        </form>
+    </div>
+
+
+</div>

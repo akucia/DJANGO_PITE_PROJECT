@@ -1,10 +1,8 @@
 
 // init default document structure
 $( document ).ready(function() {
-    loadDefaultBody();
-    loadLoginPane();
 
-    $('#navBar').on('click', '.navMenuLink',function(event){
+    $(document).on('click', '.navMenuLink',function(event){
         var target=$(this).attr('href');
 
         $.get(target,function(data) {
@@ -15,15 +13,36 @@ $( document ).ready(function() {
         event.preventDefault();
     });
 
-    $('#navBar').on('click', '.showLoginPane',function(){
+    $(document).on('click', '.showLoginPane',function(){
         showLoginPane();
     });
 
-    $('#navBar').on('click','.hideLoginPane',function(){
+    $(document).on('click','.hideLoginPane',function(){
         hideLoginPane();
     });
 
-    $('#navBar').on('click','#logOutButton',function(){
+    $(document).on('click', '.insideNavLinkHide',function(event){
+        event.preventDefault();
+        $(this).removeClass("insideNavLinkHide");
+        $(this).addClass("insideNavLinkShow");
+
+        var target=$(this).attr('href');
+
+        $("#"+target).hide();
+    });
+
+    $(document).on('click', '.insideNavLinkShow',function(event){
+        event.preventDefault();
+        $(this).addClass("insideNavLinkHide");
+        $(this).removeClass("insideNavLinkShow");
+
+        var target=$(this).attr('href');
+
+        $("#"+target).show();
+    });
+
+
+    $(document).on('click','#logOutButton',function(){
 
         $.ajax({
             type: "GET",
