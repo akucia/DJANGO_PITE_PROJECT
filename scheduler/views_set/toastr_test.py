@@ -3,4 +3,4 @@ from ..models import *
 
 
 def toastr_test(request):
-   return render(request,"toastr_test.html")
+    return render(request, "toastr_test.html")

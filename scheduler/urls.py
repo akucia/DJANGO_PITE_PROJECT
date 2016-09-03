@@ -11,7 +11,6 @@ from .views_set.html_report import htmlReport
 from .views_set.website_stat_control import websiteStatManager
 from .views_set.contact_control import contactManager,sendMail
 from .views_set.terms_and_conditions import termsAndConditions
-<<<<<<< c703acc01033605a1de8673a6a2f263929ca196f
 from .views_set.jq_register_panel import registerAjaxRequest
 from .views_set.jq_login_elements import logoutRequestAjax, loginRequestAjax
 from .views_set.jq_global_statistic import jqGlobalStatistic
@@ -19,9 +18,8 @@ from .views_set.jq_contact import jqContactForm, jqContactSentMailRequest
 from  .views_set.jq_restore_password import jqRestorePassword, jqSentRestoreEmailRequest, jqSentNewPasswordRequest
 from .views_set.jq_account_management import jqAccountManagement, jqAccountChangeUserdataRequest, jqAccountChangeUserPasswordRequest, jqAccountRemoveSurveyRequest
 from .views_set.jq_surveyAnswer import jq_surveyAnswer, jqSurveyAnswerCheckUserIdRequest, jq_SurveyAnswerForm, jq_SurveyAnswerRedirector
-=======
+
 from .views_set.toastr_test import toastr_test
->>>>>>> testing toastr
 
 from .views_set.loginpanel_change_password import changePassword
 urlpatterns = [

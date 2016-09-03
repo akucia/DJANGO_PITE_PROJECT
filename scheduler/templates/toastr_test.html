@@ -1,7 +1,31 @@
 {% extends 'base.html' %}
 
 
+{% block content %}
+
+<html>
+<body>
+<toaster-container toaster-options="{'time-out': 3000, 'position-class': 'toast-bottom-left', 'close-button':true, 'animation-class': 'toast-bottom-left'}"></toaster-container>
 
 <p>
-    test czy działa
+    <button class="btn btn-default" type="submit" onclick="toastr.success('message','TITLE');" style="width: 20%;">Success</button>
 </p>
+<p>
+    <button class="btn btn-default" type="submit" onclick="toastr.warning('message','TITLE');" style="width: 20%;">Warning</button>
+</p>
+<p>
+    <button class="btn btn-default" type="submit" onclick="toastr.error('message','TITLE');" style="width: 20%;">Error</button>
+</p>
+<p>
+    <button class="btn btn-default" type="submit" onclick="toastr.info('message','TITLE');" style="width: 20%;">Info</button>
+</p>
+<p>
+    <button class="btn btn-default" type="submit" onclick="toastr.clear();" style="width: 20%;">Clear all</button>
+</p>
+
+</body>
+
+
+</html>
+
+{% endblock %}
