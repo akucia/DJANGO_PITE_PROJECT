@@ -9,6 +9,7 @@
 
     <div id="answerSumUp">
     <ul>
+
         {% if answerDates %}
             {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
                 {% if fitUsers %}
@@ -56,6 +57,8 @@
 
 
     </div>
+
+
 
     {% if answerDates %}
     {% include 'survey_manager_components/survey_manager_chart_head.html' %}

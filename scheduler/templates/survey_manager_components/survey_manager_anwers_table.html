@@ -1,0 +1,51 @@
+{% if adminID %}
+
+    <h1>
+        Tabela
+    </h1>
+
+<div id="answerSumUpNew">
+    <ul>
+        {% if answerDates %}
+
+
+                <table class="table-striped">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th> Od: </th>
+                            {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
+                            <th> {{ fromDate }} </th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th> </th>
+                            <th> Do: </th>
+                            {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
+                            <th> {{ toDate }} </th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <th></th> <th></th>
+                            {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
+                            <th>
+                            <table class="table-striped">
+
+                                {% for name,surname,email in fitUsers %}
+                                        <p> {{ name }} {{ surname }}  </p>
+                                {% endfor %}
+
+                            </table>
+                            {% endfor %}
+                            </th>
+                </table>
+
+        {% else %}
+            <div class="alert alert-info" role="alert">Nie udzielono jeszcze żadnych odpowiedzi</div>
+        {% endif %}
+    </ul>
+
+</div>
+
+
+{% endif %}
