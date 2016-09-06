@@ -52,6 +52,7 @@ def surveyManager(request):
         listOfAnswers=[]
         answers=Answer.objects.filter(survey=row)
 
+        users = {}
         anyMatches=False
         for fromDate,toDate in row.fields:
             listOfMatches=[]
@@ -60,12 +61,15 @@ def surveyManager(request):
                     if answer.answer[(fromDate,toDate)]:
                         anyMatches=True
                         listOfMatches.append((answer.name,answer.surname,answer.email))
+                        users[(answer.name,answer.surname,answer.email)] = True
                 except:
                     pass
             listOfAnswers.append((fromDate,toDate,listOfMatches,len(listOfMatches)))
 
-        if not anyMatches:
-            listOfAnswers=None
+
+
+
+
 
 
         return render(request,"survey_manager_panel.html",{'title' : row.title ,
@@ -74,6 +78,7 @@ def surveyManager(request):
                                                            'userID' : row.userID,
                                                            'adminID' : row.adminID,
                                                            'answerDates': listOfAnswers,
+                                                           'answerUsers': users,
                                                            'lastOk' : lastOk,
                                                            'adminURL' : adminURL,
                                                            'userURL' : userURL,

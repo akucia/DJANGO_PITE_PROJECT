@@ -26,18 +26,29 @@
                             {% endfor %}
                         </tr>
                     </thead>
-                    <th></th> <th></th>
-                            {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
-                            <th>
-                            <table class="table-striped">
+                    {% for name,surname,email in answerUsers %}
 
-                                {% for name,surname,email in fitUsers %}
-                                        <p> {{ name }} {{ surname }}  </p>
-                                {% endfor %}
+                    <tr>
+                        <th> {{ name }} {{ surname }} </th> <th></th>
 
-                            </table>
+                        {% for fromDate,toDate,fitUsers,numberOfVotes in answerDates %}
+                            <td >
+                            {% for n,s,e in fitUsers %}
+
+                                {% if e == email %}
+                                  <p style="text-align:center;" > &#10004; </p>
+
+                                {% else %}
+                                    <p></p>
+                                {% endif %}
                             {% endfor %}
-                            </th>
+                                </td>
+
+                        {% endfor %}
+
+
+                    </tr>
+                    {% endfor %}
                 </table>
 
         {% else %}
